@@ -1,0 +1,308 @@
+<div class="container">
+    <div class="p-5 text-center">
+        <h4>Registros de Alumnos</h4>
+    </div>
+    <div class="main-content">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow">
+                        <div class="card-header border-0">
+                          <br>
+                            <div class="row">
+                                    <div class="col-auto me-auto col-md-5">
+                                    <div class="input-group">
+                                      <input class="form-control border-end-0 border rounded-pill" type="text" placeholder="Buscar por nombre" (keyup)="buscar(txtBuscar.value)" #txtBuscar>
+                                      <!-- <span class="input-group-append">
+                                          <button class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5" type="button">
+                                              <i class="fa fa-search"></i>
+                                          </button>
+                                      </span> -->
+                                    </div>
+                                    <br>
+                                </div>
+                             
+                                <div class="col-auto">
+                                    <h3><a data-bs-toggle="modal" (click)="limpiarControls()" data-bs-target="#Registro" class="btn btn-primary">Agregar Alumno</a></h3>                                        
+                                </div>
+                                <div class="col-auto">
+                                  <!-- Example split danger button -->
+                                  <div class="dropdown">
+                                          <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                              Carreras
+                                          </button>
+                                          <ul class="dropdown-menu" aria-labelledby="dropdown">
+                                              <li ><a class="dropdown-item" (click)="cargarAlumnos(1)">Todas las carreras</a></li>
+                                              <li *ngFor="let carrera of carreras"><a class="dropdown-item" (click)="buscarCarrera(carrera.id,1)">{{carrera.nombre_corto}}</a></li>
+                                          </ul>
+                                      </div>
+                              </div>
+                                
+                            </div>
+                        </div>
+                        <!--cuerpo de Card-->
+                        <div class="card-body">
+                            <!-- <p class="card-text">Listado de carreras</p> -->
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="thead-primary">
+                                      <tr>
+                                        <th scope="col">Numero de control</th>
+                                        <th scope="col">Nombre completo</th>
+                                        <th scope="col">Carrera</th>
+                                        <th scope="col">Opciones</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let alumno of alumnos" >
+                                        <th scope="row">{{alumno.no_control}}</th>
+                                        <td scope="row">{{alumno.nombre_completo}}</td>
+                                        <td scope="row">{{alumno.carrera}}</td>                                      
+                                        <td>
+                                            <button class="btn btn-outline-success" (click)="obtenerAlumno(alumno)"  data-bs-toggle="modal" data-bs-target="#Ver" >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                </svg>
+                                            </button>
+                                            <span>&nbsp;</span>
+                                            <button class="btn btn-outline-warning" (click)="obtenerAlumno(alumno)" data-bs-toggle="modal" data-bs-target="#Editar"> 
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                                </svg>
+                                            </button>
+                                            <span>&nbsp;</span>
+                                            <button class="btn btn-outline-danger" (click)="eliminarAlumno(alumno)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                              </div>
+                        </div>
+                        <div *ngIf="txtBuscar.value.length === 0" class="card-footer py-4">
+                             <nav aria-label="...">
+                              <ul class="pagination justify-content-end mb-0">
+                                <li class="page-item ">
+                                  <button class="page-link" [disabled]="!anterior" (click)="cambiarPagina(-1)" tabindex="-1">
+                                    <i class="bi bi-arrow-left"></i>
+                                    <!-- <span class="sr-only"></span> -->
+                                  </button>
+                                </li>
+                                <!-- <li class="page-item active">
+                                  <a class="page-link" href="#">1</a>
+                                </li> -->
+                    
+                                  <li *ngFor="let num of numSequence(totalPaginas); index as i " [class.active]="paginaActual-1 === i"  class="page-item">
+                                    <a class="page-link" *ngIf="isAll" (click)="cargarAlumnos(i+1)">{{i+1}}</a>
+                                    <a class="page-link" *ngIf="!isAll" (click)="buscarCarrera(carreraActual,i+1)">{{i+1}}</a>
+                                  </li>
+
+                                <li class="page-item">
+                                  <button class="page-link" [disabled]="siguiente" (click)="cambiarPagina(+1)">
+                                    <i class="bi bi-arrow-right"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal #Crear Nuevo Registro -->
+<div class="modal fade" id="Registro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Crear Alumno</h5>
+        <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#Registro" aria-label="Close"></button>
+      </div>
+      
+        <div class="modal-body">
+          <div class="p-4">
+            <form [formGroup]="formulario" novalidate>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="position-relative mb-4">
+                        <label for="no_control" class="form-label" ><h6>Numero de control </h6></label>
+                        <input type="text" id="no_control" formControlName="no_control" class="form-control mayuscula" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="position-relative mb-4">
+                        <label for="nip" class="form-label" ><h6>Nip</h6></label>
+                        <input type="text" id="nip" formControlName="nip" class="form-control mayuscula" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="mb-4">
+                        <label for="carrera" class="form-label"><h6>Carrera</h6></label>
+                        <select class="form-select mb-3" formControlName="carrera" name="carrera">
+                          <option value="" disabled>Seleccione la carrera...</option>
+                          <option *ngFor="let carrera of carreras" [ngValue]="carrera.id">{{carrera.nombre_corto}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="mb-4">
+                        <label for="nombre" class="form-label"><h6>Nombre</h6></label>
+                        <input type="text" id="nombre" formControlName="nombre" class="form-control mayuscula" autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="mb-4">
+                        <label for="a_paterno" class="form-label" ><h6>Apellido Paterno</h6></label>
+                        <input type="text" id="a_paterno" formControlName="a_paterno" class="form-control mayuscula" autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="mb-4">
+                        <label for="a_materno" class="form-label" ><h6>Apellido Materno</h6></label>
+                        <input type="text" id="a_materno" formControlName="a_materno" class="form-control mayuscula" autocomplete="off" required>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" (click)="agregarAlumno()" data-bs-dismiss="modal" >Guardar</button>
+            </div>
+            </form>
+          </div>
+        </div>
+    </div>
+  </div>
+</div> 
+<!-- Modal #Editar registro -->
+<div class="modal fade" id="Editar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Editar Alumno</h5>
+        <button type="button" class="btn-close" (click)="limpiarControls()" data-bs-toggle="modal" data-bs-target="#Editar" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="p-4">
+          <form class="mb-2" [formGroup]="formulario" novalidate>
+          <div class="row">
+              <div class="col-sm-4">
+                  <div class="position-relative mb-4">
+                      <label for="no_control" class="form-label" ><h6>Numero de control </h6></label>
+                      <input type="text" id="no_control" formControlName="no_control" value="{{this.alumno.no_control}}" class="form-control mayuscula" autocomplete="off" readonly>
+                  </div>
+              </div>
+              <div class="col-sm-4">
+                  <div class="position-relative mb-4">
+                      <label for="nip" class="form-label" ><h6>Nip</h6></label>
+                      <input type="text" id="nip" formControlName="nip" value="{{this.alumno.nip}}" class="form-control mayuscula" autocomplete="off" readonly>
+                  </div>
+              </div>
+              <div class="col-sm-4">
+                  <div class="mb-4">
+                      <label for="carrera" class="form-label"><h6>Carrera</h6></label>
+                      <select class="form-select mb-3" formControlName="carrera">
+                        <option value="" disabled>Seleccione la carrera...</option>
+                        <option *ngFor="let carrera of carreras" [ngValue]="carrera.id">{{carrera.nombre_corto}}</option>
+                      </select>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-sm-4">
+                  <div class="mb-4">
+                      <label for="nombre" class="form-label"><h6>Nombre</h6></label>
+                      <input type="text" id="nombre" formControlName="nombre" name="a_nombre" class="form-control mayuscula"  value="{{this.alumno.nombre}}"required  autocomplete="off">
+                  </div>
+              </div>
+              <div class="col-sm-4">
+                  <div class="mb-4">
+                      <label for="a_paterno" class="form-label" ><h6>Apellido Paterno</h6></label>
+                      <input type="text" id="a_paterno" formControlName="a_paterno" name="a_paterno" class="form-control mayuscula"  value="{{this.alumno.a_paterno}}" required  autocomplete="off">
+                  </div>
+              </div>
+              <div class="col-sm-4">
+                  <div class="mb-4">
+                      <label for="a_materno" class="form-label" ><h6>Apellido Materno</h6></label>
+                      <input type="text" id="a_materno" formControlName="a_materno" name="a_materno" class="form-control mayuscula"  value="{{this.alumno.a_materno}}" required autocomplete="off">
+                  </div>
+              </div>
+          </div>
+           <div class="modal-footer">
+                <button type="button" (click)="limpiarControls()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button (click)="editarAlumno()" data-bs-dismiss="modal" class="btn btn-primary">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+<!-- Modal #Ver egistro -->
+<div class="modal fade" id="Ver" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Crear Alumno</h5>
+        <button type="button" class="btn-close" (click)="limpiarControls()" data-bs-toggle="modal" data-bs-target="#Ver" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="p-4">
+          <form class="mb-2" [formGroup]="formulario" novalidate>
+          <div class="row">
+              <div class="col-sm-4">
+                  <div class="position-relative mb-4">
+                      <label for="no_control" class="form-label" ><h6>Numero de control </h6></label>
+                      <input type="text" id="no_control" formControlName="no_control" value="{{this.alumno.no_control}}" class="form-control mayuscula" autocomplete="off" readonly>
+                  </div>
+              </div>
+              <div class="col-sm-4">
+                  <div class="position-relative mb-4">
+                      <label for="nip" class="form-label" ><h6>Nip</h6></label>
+                      <input type="text" id="nip" formControlName="nip" value="{{this.alumno.nip}}" class="form-control mayuscula" autocomplete="off" readonly>
+                  </div>
+              </div>
+              <div class="col-sm-4">
+                  <div class="mb-4">
+                      <label for="carrera" class="form-label"><h6>Carrera</h6></label>
+                      <select class="form-select mb-3" formControlName="carrera">
+                        <option value="" disabled>Seleccione la carrera...</option>
+                        <option *ngFor="let carrera of carreras" [ngValue]="carrera.id">{{carrera.nombre_corto}}</option>
+                      </select>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-sm-4">
+                  <div class="mb-4">
+                      <label for="nombre" class="form-label"><h6>Nombre</h6></label>
+                      <input type="text" id="nombre" formControlName="nombre" class="form-control mayuscula"  value="{{this.alumno.nombre}}" readonly >
+                  </div>
+              </div>
+              <div class="col-sm-4">
+                  <div class="mb-4">
+                      <label for="a_paterno" class="form-label" ><h6>Apellido Paterno</h6></label>
+                      <input type="text" id="a_paterno" formControlName="a_paterno" class="form-control mayuscula"  value="{{this.alumno.a_paterno}}" readonly >
+                  </div>
+              </div>
+              <div class="col-sm-4">
+                  <div class="mb-4">
+                      <label for="a_materno" class="form-label" ><h6>Apellido Materno</h6></label>
+                      <input type="text" id="a_materno" formControlName="a_materno" class="form-control mayuscula"  value="{{this.alumno.a_materno}}" readonly autocomplete="off" required>
+                  </div>
+              </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

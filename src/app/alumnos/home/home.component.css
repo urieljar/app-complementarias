@@ -1,0 +1,16 @@
+:root {
+  --gradient: linear-gradient(to left top, #DD2476 10%, #FF512F 90%) !important;
+}
+
+
+.card {
+  background-color: #f5f7fa;
+  border: 1px solid #139b0c;
+  border-radius:5px;
+  box-shadow:0 0 10px rgba(58, 164, 102, 0.63);
+  margin-top:10px;
+  --margin-bottom: 2rem;
+}
+.card-header{
+  background-color: #139b0c;
+}

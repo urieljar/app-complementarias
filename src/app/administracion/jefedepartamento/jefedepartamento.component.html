@@ -1,0 +1,329 @@
+<div class="container">
+    <div class="p-5 text-center">
+        <h4>Jefes de Departamento</h4>
+    </div>
+    <div class="main-content">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow">
+                        <div class="card-header border-0">
+                            <div class="row">
+                                <div class="col-auto me-auto">
+                                    <h4>Registros de Jefes de Departamento</h4>
+                                </div>
+                                <div class="col-auto">
+                                    <h3><a data-bs-toggle="modal" data-bs-target="#Registro" class="btn btn-primary">Nuevo Jefe Departamento</a></h3>                                        
+                                </div>
+                            </div>
+                        </div>
+                        <!--cuerpo de Card-->
+                        <div class="card-body">
+                            <!-- <p class="card-text">Listado de carreras</p> -->
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="thead-primary">
+                                      <tr>
+                                        <th scope="col">RFC</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Departamento</th>
+                                        <th scope="col">Fecha de registro</th>
+                                        <!-- <th scope="col">Estado</th> -->
+                                        <th scope="col">Opciones</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let jefes of jdptos">
+                                        <th scope="row">{{jefes.rfc}}</th>
+                                        <td scope="row">{{jefes.nombre_completo}}</td>
+                                        <td scope="row">{{jefes.departamento}}</td>
+                                        <td scope="row">{{jefes.fecha_ingreso | date: 'longDate'}}</td>
+                                        <!-- <td *ngIf="jefes.status == 0" class="text-danger" >
+                                          Inactivo
+                                        </td>
+                                        <td *ngIf="jefes.status == 1" class="text-success" >
+                                          Activo
+                                        </td> -->
+                                        <td>
+                                            <button class="btn btn-outline-success" (click)="obtenerJefeDpto(jefes)" data-bs-toggle="modal" data-bs-target="#Ver" >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                </svg>
+                                            </button>
+                                            <span>&nbsp;</span>
+                                            <button class="btn btn-outline-warning" (click)="obtenerJefeDpto(jefes)" data-bs-toggle="modal" data-bs-target="#Editar"> 
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                                </svg>
+                                            </button>
+                                            <span>&nbsp;</span>
+                                            <button class="btn btn-outline-danger" (click)="eliminarJefeDpto(jefes)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                              </div>
+                        </div>
+                        <div class="card-footer py-4">
+                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal #Crear Nuevo Registro -->
+<div class="modal fade" id="Registro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Crear Jefe Departamento</h5>
+        <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#Registro" aria-label="Close"></button>
+      </div>
+      
+        <div class="modal-body">
+          <div class="p-4">
+            <form [formGroup]="formulario" novalidate>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="position-relative mb-4">
+                        <label for="rfc" class="form-label" ><h6>RFC</h6></label>
+                        <input type="text" id="rfc" formControlName="rfc" class="form-control mayuscula" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="mb-4">
+                        <label for="departamento" class="form-label"><h6>Departamento Responsable</h6></label>
+                        <select class="form-select mb-3" formControlName="departamento" name="departamento">
+                          <option value="" disabled>Seleccione el Departamento...</option>
+                          <option *ngFor="let depto of dptos" [ngValue]="depto.id">{{depto.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="mb-4">
+                        <label for="nombre" class="form-label"><h6>Nombre</h6></label>
+                        <input type="text" id="nombre" formControlName="nombre" class="form-control mayuscula" autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="mb-4">
+                        <label for="apellidos" class="form-label" ><h6>Apellidos</h6></label>
+                        <input type="text" id="apellidos" formControlName="apellidos" class="form-control mayuscula" autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label for="status" class="form-label"><h6>Estado</h6></label>
+                        <select class="form-select mb-3" formControlName="status" (change)="obtenerstatus($event)" name="status" aria-label="Estado" ><!--(change)="status($event)"-->
+                            <option disabled value="" >Seleccione el Estado...</option>
+                            <option value='0'>Inactivo</option>
+                            <option value='1'>Activo</option>
+                        </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="mb-4">
+                        <label for="clave" class="form-label" ><h6>Password</h6></label>
+                        <div class="input-group mb-3">
+                            <input [type]="changetype?'password':'text'" id="clave" formControlName="clave" class="form-control" autocomplete="off" required>
+                            <button class="btn btn-outline-secondary" type="button" id="viewPassword" (click)="verPassword()"><i [ngClass]="visible?'bi bi-eye-slash-fill':'bi bi-eye-fill'"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="mb-4">
+                        <label for="fecha_ingreso" class="form-label" ><h6>Fecha de Ingreso</h6></label>
+                        <input type="date" id="fecha_ingreso" formControlName="fecha_ingreso" [min]="ahora" (ngModelChange)="cambioFecha()" [ngClass]="{ 'is-invalid': submitted && f.fecha_ingreso.errors}" class="form-control" autocomplete="off" required>
+                    </div>
+                    <!-- <div *ngIf="submitted && f.fecha_ingreso.errors" class="invalid-feedback">
+                      <div *ngIf="f.fecha_ingreso.errors.required">Por favor, selecciona la Fecha de Ingreso</div>
+                    </div> -->
+                </div>
+                <div class="col-sm-4">
+                    <div class="mb-4">
+                        <label for="fecha_termina" class="form-label" ><h6>Fecha que Termina</h6></label>
+                        <input type="date" id="fecha_termina" formControlName="fecha_termina" [min]="deshabilitar" [ngClass]="{ 'is-invalid': submitted && f.fecha_termina.errors}" class="form-control" autocomplete="off" >
+                    </div>
+                    <!-- <div *ngIf="submitted && f.fecha_termina.errors" class="invalid-feedback">
+                      <div *ngIf="f.fecha_termina.errors.required">Por favor, seleccionar la Fecha de Egreso</div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" (click)="agregarJefeDpto()" data-bs-dismiss="modal" >Guardar</button>
+            </div>
+            </form>
+          </div>
+        </div>
+    </div>
+  </div>
+</div> 
+<!-- Modal #Editar Registro -->
+<div class="modal fade" id="Editar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Editar Jefe Departamento</h5>
+        <button type="button" (click)="limpiarControls()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="p-4">
+           <form class="mb-2" [formGroup]="formulario" novalidate>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="position-relative mb-4">
+                        <label for="rfc" class="form-label" ><h6>RFC</h6></label>
+                        <input type="text" id="rfc" formControlName="rfc" class="form-control mayuscula" value="{{this.jdpto.rfc}}" autocomplete="off" readonly>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="mb-4">
+                        <label for="departamento" class="form-label"><h6>Departamento Responsable</h6></label>
+                        <select class="form-select mb-3" id="departamento" formControlName="departamento" size="1" name="departamento" aria-label="Departamento">
+                          <option value="" disabled>Seleccione el Departamento...</option>
+                          <option *ngFor="let depto of dptos" [ngValue]="depto.id">{{depto.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="mb-4">
+                        <label for="nombre" class="form-label"><h6>Nombre</h6></label>
+                        <input type="text" id="nombre" formControlName="nombre" class="form-control mayuscula" autocomplete="off"  value="{{this.jdpto.nombre}}" required>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="mb-4">
+                        <label for="apellidos" class="form-label" ><h6>Apellidos</h6></label>
+                        <input type="text" id="apellidos" formControlName="apellidos" class="form-control mayuscula" autocomplete="off" value="{{this.jdpto.apellidos}}" required>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label for="status" class="form-label"><h6>Estado</h6></label>
+                        <select class="form-select mb-3" formControlName="status" (change)="obtenerstatus($event)" name="status"><!--(ngModelChange)="obtenerEstado()"-->
+                          <!-- <option disabled [ngValue]="null" selected>Seleccione el Estado...</option> -->
+                          <option value='0'>Inactivo</option>
+                          <option value='1'>Activo</option>
+                        </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="mb-4">
+                        <label for="clave" class="form-label" ><h6>Password</h6></label>
+                        <div class="input-group mb-3">
+                            <input [type]="changetype?'password':'text'" id="clave" formControlName="clave" class="form-control" autocomplete="off"  value="{{this.jdpto.clave}}" name="clave" readonly>
+                            <button class="btn btn-outline-secondary" type="button" id="viewPassword" (click)="verPassword()" disabled><i [ngClass]="visible?'bi bi-eye-slash-fill':'bi bi-eye-fill'"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="mb-4">
+                        <label for="fecha_ingreso" class="form-label" ><h6>Fecha de Ingreso</h6></label>
+                        <input type="text" id="fecha_ingreso" formControlName="fecha_ingreso" value="{{this.jdpto.fecha_ingreso | date: 'longDate'}}" (ngModelChange)="cambioFecha()" [ngClass]="{ 'is-invalid': submitted && f.fecha_ingreso.errors}" class="form-control"  autocomplete="off" readonly>
+                    </div>
+                    <!-- <div *ngIf="submitted && f.fecha_ingreso.errors" class="invalid-feedback">
+                      <div *ngIf="f.fecha_ingreso.errors.required">Por favor, selecciona la Fecha de Ingreso</div>
+                    </div> -->
+                </div>
+                <div class="col-sm-4">
+                    <div class="mb-4">
+                        <label for="fecha_termina" class="form-label" ><h6>Fecha que Termina</h6></label>
+                        <input type="text" id="fecha_termina" formControlName="fecha_termina" [min]="deshabilitar" value="{{this.jdpto.fecha_termina|date: 'd/M/yyyy'}}" [ngClass]="{ 'is-invalid': submitted && f.fecha_termina.errors}" class="form-control" autocomplete="off" readonly>
+                    </div>
+                    <!-- <div *ngIf="submitted && f.fecha_termina.errors" class="invalid-feedback">
+                      <div *ngIf="f.fecha_termina.errors.required">Por favor, seleccionar la Fecha de Egreso</div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="limpiarControls()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button (click)="editarJefeDpto()" data-bs-dismiss="modal" class="btn btn-primary">Guardar</button>
+            </div>
+            </form>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div> 
+
+<!-- Modal #verRegistro -->
+<div class="modal fade" id="Ver" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> Jefe Departamento</h5>
+        <button type="button" (click)="limpiarControls()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="p-4">
+           <form class="mb-2" [formGroup]="formulario" novalidate>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="position-relative mb-4">
+                        <label for="rfc" class="form-label" ><h6>RFC</h6></label>
+                        <input type="text" id="rfc" formControlName="rfc" class="form-control mayuscula" value="{{this.jdpto.rfc}}" autocomplete="off" readonly>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="mb-4">
+                        <label for="departamento" class="form-label"><h6>Departamento Responsable</h6></label>
+                        <select class="form-select mb-3" formControlName="departamento">
+                          <option disabled selected *ngFor="let depto of dptos" [ngValue]="depto.id">{{depto.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="mb-4">
+                            <label for="nombre" class="form-label"><h6>Nombre</h6></label>
+                            <input type="text" id="nombre" formControlName="nombre" class="form-control mayuscula" autocomplete="off" value="{{this.jdpto.nombre}}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="mb-4">
+                            <label for="apellidos" class="form-label" ><h6>Apellidos</h6></label>
+                            <input type="text" id="apellidos" formControlName="apellidos" class="form-control mayuscula" autocomplete="off" value="{{this.jdpto.apellidos}}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="status" class="form-label"><h6>Estado</h6></label>
+                        <input type="text" *ngIf="this.jdpto.status == 1" class="form-control mayuscula text-success" value="Activo" readonly>
+                        <input type="text" *ngIf="this.jdpto.status == 0" class="form-control mayuscula text-danger" value="Inactivo" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-4">
+                            <label for="fecha_ingreso" class="form-label" ><h6>Fecha de Ingreso</h6></label>
+                            <input type="text" formControlName="fecha_ingreso" value="{{this.jdpto.fecha_ingreso | date: 'longDate'}}"  class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-4">
+                            <label for="fecha_termina" class="form-label" ><h6>Fecha que Termina</h6></label>
+                            <input type="text" formControlName="fecha_termina" [min]="deshabilitar" value="{{this.jdpto.fecha_termina|date: 'longDate'}}" class="form-control" readonly>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

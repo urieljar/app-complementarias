@@ -1,0 +1,138 @@
+<div class="bg-gray-100">
+    <div class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+        <hr class="horizontal dark mt-0">
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="row">
+                    <div class="col-md-12 mb-lg-0 mb-4">
+                        <form [formGroup]="formulario" novalidate>
+                            <div class="card mt-4">
+                                <div class="card-header pb-0 p-3">
+                                    <div class="row">
+                                        <div class="col-8 d-flex align-items-center">
+                                            <h4 >Crear una actividad complementaria</h4>
+                                        </div>
+                                         <div class="col-4 text-end">
+                                            <button class="btn btn-primary mb-0" (click)="editarActComplementaria()" [disabled]="!isValidSubmit"><i class="bi bi-plus"></i>
+                                                &nbsp;&nbsp;Guardar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body p-3">
+                                    <div class="row mt-4 ">
+                                        <div class="col-md-12 mt-2 mb-4">
+                                            <input type="text" id="act_gnral" name="act_gnral" formControlName="act_gnral" placeholder="Nombre de la actividad general" class="form-control form-control-lg" autocomplete="off" required>
+                                        </div>
+                                        <div class="col-md-12 mt-2 mb-4">
+                                            <input type="text" id="act_especifica"  formControlName="act_especifica"  placeholder="Nombre de la actividad especifica" class="form-control form-control-lg" autocomplete="off" required>
+                                        </div>
+                                        <div class="col-md-6 mb-md-0 mb-4">
+                                            <div class="mb-3 row">
+                                                <label  class="col-sm-3 mb-md-0 col-form-label">Credito</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-select form-select-lg mb-3" formControlName="credito" name="credito"><!---->
+                                                        <option selected value="" disabled>Seleccione el credito...</option>
+                                                        <option value="1">⭐</option>
+                                                        <option value="2">⭐⭐</option>
+                                                        <option value="3">⭐⭐⭐</option>
+                                                        <option value="4">⭐⭐⭐⭐</option>
+                                                        <option value="5">⭐⭐⭐⭐⭐</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select class="form-select form-select-lg mb-3" formControlName="tipo">
+                                                <option value="" disabled>Seleccione el tipo de actividad</option>
+                                                <option *ngFor="let tipo of TiposActs" [ngValue]="tipo.id">{{tipo.nombre}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-5 mb-md-0 mb-4">
+                                            <input type="text" id="lugar" formControlName="lugar" placeholder="Especificar el lugar a realizar." class="form-control form-control-lg" autocomplete="off" required>
+                                        </div>
+                                        <div class="col-md-4 mb-md-0 mb-4">
+                                            <input type="text" id="nombre" formControlName="num_participantes"  placeholder="Numero de participantes" class="form-control form-control-lg" autocomplete="off" required>
+                                        </div>
+                                        <div class="col-md-3 mb-md-0 mb-4">
+                                            <input type="text" id="nombre" formControlName="tiempo" placeholder="Tiempo de duracion" class="form-control form-control-lg" autocomplete="off" required>
+                                        </div>
+                                        <div class="col-md-12 mt-2 mb-4">
+                                            <label for="exampleFormControlTextarea1" class="form-label">Descripcion</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="descripcion" rows="3"></textarea>
+                                        </div>
+                                        <h4 class="d-flex justify-content-center">Evidencias comprobatorias.</h4>
+                                        <ul class="list-group">
+                                            <li *ngFor="let evd2 of EvdsComproba" class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                                                <div class="d-flex flex-column">
+                                                    <h4 class="mb-3 text-sm">{{evd2.evd_pres_des}}</h4>
+                                                </div>
+                                                <div class="ms-auto text-end">
+                                                    <a (click)="eliminarElemento(evd2)" class="btn btn-link text-danger text-gradient px-3 mb-0">
+                                                        <i class="bi bi-trash3-fill me-2" aria-hidden="true"></i>
+                                                        <!-- Delete -->
+                                                    </a>
+                                                </div>
+                                            </li> 
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card h-100">
+                        <div class="card-header pb-0 p-3">
+                            <div class="row">
+                            <div class="col-6 d-flex align-items-center">
+                                <h6 class="mb-0">Evidencias a presentar</h6>
+                            </div>
+                            <div class="col-6 text-end">
+                                <button data-bs-toggle="modal" data-bs-target="#NuevoEvdPre" [hidden]="!this.isValidSubmit2" class="btn btn-outline-primary btn-sm mb-0" aria-hidden="true">
+                                    Nuevo
+                                </button>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-3 pb-0">
+                            <ul class="list-group">
+                                <li *ngFor="let evdPresentar of datosFiltrados" class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                                    <div class="d-flex flex-column">
+                                    <h5 class="mb-1 text-dark font-weight-bold text-sm">
+                                       {{evdPresentar.descripcion}}
+                                    </h5>
+                                    <!-- <span class="text-xs">{{evdPresentar.descripcion}}</span> -->
+                                    </div>
+                                    <div class="d-flex align-items-center text-sm">
+                                        <!-- $180 -->
+                                        <button (click)="agregarElemento(evdPresentar)" [hidden]="this.isValidSubmit2" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><!--[disabled]="!isValidSubmit2"-->
+                                            <i class="bi bi-plus-square text-lg me-1"></i>
+                                            <!-- PDF -->
+                                        </button>
+                                        <!-- <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4">
+                                            <i   data-bs-toggle="modal" data-bs-target="#EditarEvdPre" [hidden]="this.isValidSubmit2" (click)="obtenerEvdPresentar(evdPresentar)" class="bi bi-pencil-fill text-lg me-1" ></i>
+                                        </button>
+                                        <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4">
+                                            <i class="bi bi-trash-fill text-lg me-1" (click)="eliminarEvdPre(evdPresentar)" [hidden]="this.isValidSubmit2"></i>
+                                        </button> -->
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fixed-plugin">
+    <a routerLink="/administracion/complementaria" class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+      <i class="fa fa-undo py-2"> </i>
+    </a>
+ </div>

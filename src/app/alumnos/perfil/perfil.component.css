@@ -1,0 +1,24 @@
+.main-content-area {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.side-pull-left .main-content-inner {
+    float: left;
+}
+
+.side-pull-right .main-content-inner {
+    float: right;
+}
+
+.post-inner-content {
+    padding: 45px 50px;
+    background-color: #fff;
+    border: 1px solid #dadada;
+    border-top: none;
+}
+
+.page-header {
+    margin-top: 0;
+    border-bottom: 0;
+    padding-bottom: 0;
+}

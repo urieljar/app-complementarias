@@ -1,0 +1,43 @@
+<header>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+ <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <!-- Navbar brand -->
+        <a class="navbar-brand mt-2 mt-lg-0">
+          <img src="assets/img/Alumno.png" height="25" alt="Logo Jefe" />
+        </a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="#">Actividades Complementarias</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/alumnos/registrarse">Inscribirme a un actividad</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/alumnos/perfil">Actualizar Perfil</a>
+        </li>
+    
+      </ul>
+      </div>
+      <!-- Collapsible wrapper -->
+
+      <!-- Right elements -->
+      <div class="d-flex align-items-center">
+        <!-- LOGOUT -->
+        <div class="dropdown">
+          <a class="dropdown-item" routerLink="/inicio" (click)="limpiarStorage()">Salir</a>
+        </div>
+      </div>
+      <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+</header>

@@ -1,0 +1,162 @@
+<div class="container">
+    <div class="p-5 text-center">
+        <h4>CARRERAS</h4>
+        <P></P>
+    </div>
+    <div class="main-content">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow">
+                        <div class="card-header border-0">
+                            <div class="row">
+                                <div class="col-auto me-auto">
+                                    <h2>Registros de Carreras</h2>
+                                </div>
+                                <div class="col-auto">
+                                    <h3><a data-bs-toggle="modal" data-bs-target="#Registro" class="btn btn-primary">Nueva Carrera</a></h3>                                        
+                                </div>
+                            </div>
+                        </div>
+                        <!--cuerpo de Card-->
+                        <div class="card-body">
+                            <!-- <p class="card-text">Listado de carreras</p> -->
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="thead-primary">
+                                      <tr>
+                                        <th scope="col" width="35%">Nombre de la Carrera</th>
+                                        <th scope="col" width="25%">Nombre Corto de la carrera</th>
+                                        <th scope="col" width="30%">Jefe de la carrera</th>
+                                        <th scope="col" width="10%">Opciones</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let carrera of carreras">
+                                        <th scope="row">{{carrera.nombre}}</th>
+                                        <td>{{carrera.nombre_corto}}</td>
+                                        <td>{{carrera.jefe}}</td>
+                                        <td>
+                                          <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#Editar" (click)="obtenerCarrera(carrera)"> 
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                            </svg>
+                                          </button>
+                                          <span>&nbsp;</span>
+                                          <button class="btn btn-outline-danger" (click)="eliminarCarrera(carrera)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                              <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                            </svg>
+                                          </button>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                              </div>
+                        </div>
+                        <div class="card-footer py-4">
+                            <nav aria-label="...">
+                              <ul class="pagination justify-content-end mb-0">
+                                <li class="page-item disabled">
+                                  <a class="page-link" href="#" tabindex="-1">
+                                    <i class="bi bi-arrow-left"></i>
+                                    <span class="sr-only">Previous</span>
+                                  </a>
+                                </li>
+                                <li class="page-item active">
+                                  <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item">
+                                  <a class="page-link" href="#">2</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                  <button class="page-link" href="#">
+                                    <i class="bi bi-arrow-right"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal #Crear Nuevo Registro -->
+<div class="modal fade" id="Registro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Crear carrera para el Instituto</h5>
+        <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#Registro" aria-label="Close"></button>
+      </div>
+      
+        <div class="modal-body">
+          <div class="p-4">
+            <form class="mb-2" #f2="ngForm" novalidate>
+            <div class="position-relative mb-4">
+              <label for="nombre" class="form-label"><h6>Nombre de la carrera</h6></label>
+              <input type="text" id="nombre" name="nombre" [(ngModel)]="carrera.nombre" (ngModelChange)="nombreS($event)"  class="form-control form-control-lg" required>
+            </div>
+            <div class="mb-4">
+              <label for="nombre_corto" class="form-label"><h6>Nombre Corto de la carrera</h6></label>
+              <input type="text" id="nombre_corto" name="nombre_corto" [(ngModel)]="carrera.nombre_corto" (ngModelChange)="nombreCorto($event)" class="form-control form-control-lg" required>
+            </div>
+            <div class="mb-4">
+              <label for="jdepto" class="form-label"><h6>Jefe de la carrera</h6></label>
+              <select class="form-select form-select-lg mb-3" (change)="selectJdpto($event)" name="jdepto">
+                <option [ngValue]="null" disabled selected>Seleccione el jefe de la carrera...</option>
+                <option *ngFor="let jdepto of jdptos" [ngValue]="jdepto.rfc" value="{{jdepto.rfc}}">{{jdepto.nombre_completo}}</option>
+              </select>
+            </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="agregarCarrera()" [disabled]="!isValidSubmit">Guardar</button>
+        </div>
+      
+    </div>
+  </div>
+</div> 
+<!-- Modal #Editar Registro -->
+<div class="modal fade" id="Editar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Editar Actividad Complementaria</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="p-4">
+          <form class="mb-2"  #f="ngForm"  novalidate>
+              <div class="position-relative mb-4">
+                <label for="nombre" class="form-label"><h6>Nombre</h6></label>
+                <input type="text" id="nombre" class="form-control form-control-lg" [(ngModel)]="carrera.nombre" name="nombre" required><!--disabled-->
+              </div>
+              <div class="mb-4">
+                <label for="nombre_corto" class="form-label"><h6>Nombre corto</h6></label>
+                <input type="text" id="nombre_corto" class="form-control form-control-lg"  [(ngModel)]="carrera.nombre_corto" name="nombre_corto" required> <!-- readOnly-->
+              </div>
+              <div class="mb-4">
+                <label for="jdepto" class="form-label"><h6>Jefe de departamento</h6></label>
+                <select class="form-select form-select-lg mb-3" [(ngModel)]="carrera.jdepto" name="jdepto">
+                  <option [ngValue]="null" disabled selected>Seleccione el jefe de la carrera...</option>
+                   <option *ngFor="let jdepto of jdptos" [ngValue]="jdepto.rfc" value="{{jdepto.rfc}}">{{jdepto.nombre_completo}}</option>
+                </select>
+              </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" (click)="editarCarrera()" data-bs-dismiss="modal" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

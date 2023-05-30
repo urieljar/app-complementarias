@@ -1,0 +1,375 @@
+
+<div class="container">
+    <div class="row py-5">
+        <div class="col-lg-12 mx-auto">
+          <div class="text-white p-5 shadow-sm rounded banner">
+            <h1 class="display-4">Actividades Académicas</h1>
+            <p class="lead">Registros de Actividades Académicas.</p>
+            <!-- <p class="lead">Listado de actividades academicas registrados, crear un <a data-bs-toggle="modal" data-bs-target="#Registro" class="text-reset">nuevo</a> registro.</p>  -->
+          </div>
+        </div>
+      </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow">
+                        <div class="card-header border-0">
+                            <div class="row justify-content-between">
+                                <div class="col-md-10">
+                                    <h3>Registros</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!--cuerpo de Card-->
+                        <div class="card-body">
+                            <p class="card-text">Todos los registros son admitidos por el comite Academico y la division de estudios.</p>
+                            <div class="row">
+                                <div class="col-md-5">
+                                  <div class="input-group">
+                                    <input class="form-control border-end-0 border rounded-pill" type="search" placeholder="Buscar ..." id="buscar">
+                                    <span class="input-group-append">
+                                        <button class="btn btn-outline-secondary border-bottom-0 border rounded-pill ms-n5" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                  </div>
+                                  <br>
+                              </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table align-items-center table-flush">
+                                  <thead class="thead-primary">
+                                    <tr>
+                                      <th >Actividad General</th>
+                                      <th >Credito</th>
+                                      <th >Tiempo</th>
+                                      <th >Actividad Especifica</th>
+                                      <th >Departamneto Responsable</th>
+                                      <th >Ajustes</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngFor="let complementaria of complementarias;index as i;">
+                                      <th scope="row">
+                                       {{complementaria.act_gnral}}
+                                      </th>
+                                      <td>
+                                         {{complementaria.credito}}
+                                      </td>
+                                      <td>
+                                        {{complementaria.tiempo}}
+                                      </td>
+                                      <td>
+                                        {{complementaria.act_especifica}}
+                                      </td>
+                                      <td>
+                                        Departamento académico 
+                                      </td>
+                                      <td >
+                                        <!-- <button class="btn btn-outline-danger" (click)="confirmBox()">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                          </svg>
+                                        </button> -->
+                                        <!-- <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#Editar" > 
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                          </svg>
+                                        </button> -->
+                                        <button class="btn btn-outline-success" (click)="obtenerActComplementaria(complementaria)" data-bs-toggle="modal" data-bs-target="#Ver" >
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                          </svg>
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                        </div>
+                        <!-- Footer de card hay que modificarlo-->
+                        <div class="card-footer py-4">
+                            <nav aria-label="...">
+                              <ul class="pagination justify-content-end mb-0">
+                                <li class="page-item disabled">
+                                  <a class="page-link" href="#" tabindex="-1">
+                                    <i class="fa fa-chevron-left"></i>
+                        
+                                  </a>
+                                </li>
+                                <li class="page-item active">
+                                  <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item">
+                                  <a class="page-link" href="#">2 <span class="sr-only"></span></a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                  <a class="page-link" href="#">
+                                    <i class="fa fa-chevron-right"></i>
+                                  </a>
+                                </li>
+                              </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<!-- Modal #Crear Nuevo Registro -->
+<!-- <div class="modal fade" id="Registro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Crear un registro</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="p-4">
+          <form class="mb-2" novalidate>
+                    <div class="position-relative mb-4">
+                        <label for="supervisor" class="form-label"><h6>Actividad General</h6></label>
+                        <input type="text" id="supervisor" class="form-control form-control-lg" formControlName="Supervisor">
+                    </div>
+                     <div class="mb-4">
+                        <label for="fecha_abono" class="form-label"><h6>Actividad Especifica</h6></label>
+                        <input type="text" id="fecha_abono" class="form-control form-control-lg" formControlName="fecha_abono">
+                    </div>
+                    <div class="mb-4">
+                        <label for="debia" class="form-label"><h6>Departamento</h6></label>
+                        <select class="form-select form-select-lg mb-3" aria-label="Departamento">
+                          <option selected>Seleccione el departamento...</option>
+                          <option value="1">Uno</option>
+                          <option value="2">Dos</option>
+                          <option value="3">Tres</option>
+                        </select>
+                        <input type="text" id="debia" class="form-control form-control-lg" formControlName="debia">
+                    </div>
+                     <div class="row">
+                      <div class="col-sm-6">
+                        <div class="mb-4">
+                          <label for="cliente" class="form-label"><h6>Lugar</h6></label>
+                          <input type="text" id="cliente" class="form-control form-control-lg" formControlName="Cliente">
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="mb-4">
+                          <label for="ahora_debe" class="form-label"><h6>Tipo de Actividad</h6></label>
+                           <select class="form-select form-select-lg mb-3" aria-label="Departamento">
+                            <option selected>Seleccione el Tipo de Actividad...</option>
+                            <option value="1">Academica</option>
+                            <option value="2">Extra-escolares</option>
+                          </select>
+                          <input type="text" id="ahora_debe" class="form-control form-control-lg" formControlName="ahora_debe">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                         <div class="mb-4">
+                            <label for="cantidad_abonar" class="form-label"><h6>Número de Créditos</h6></label>
+                            <input type="text" id="cantidad_abonar" class="form-control form-control-lg" formControlName="cantidad_abonar">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-4">
+                          <label for="promotor" class="form-label"><h6>Horas para acreditar</h6></label>
+                          <input type="text" id="promotor" class="form-control form-control-lg" formControlName="Promotor">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                          <div class="mb-4">
+                            <label for="total_pagado" class="form-label"><h6>Número de participantes</h6></label>
+                            <input type="text" id="total_pagado" class="form-control form-control-lg" formControlName="total_pagado">
+                          </div>
+                      </div>
+                    </div> 
+                    <div class="mb-4">
+                        <label for="cambio" class="form-label"><h6>Descripcion</h6></label>
+                        <textarea type="text" class="form-control form-control-lg" id="descripcion" rows="3" formControlName="descripcion"></textarea>
+                    </div>
+                </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="openToast()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- Modal #Editar Registro -->
+<!-- <div class="modal fade" id="Editar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Editar Actividad Complementaria</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="p-4">
+          <form class="mb-2" novalidate>
+                    <div class="position-relative mb-4">
+                        <label for="supervisor" class="form-label"><h6>Actividad General</h6></label>
+                        <input type="text" id="supervisor" class="form-control form-control-lg" formControlName="Supervisor">
+                    </div>
+                     <div class="mb-4">
+                        <label for="fecha_abono" class="form-label"><h6>Actividad Especifica</h6></label>
+                        <input type="text" id="fecha_abono" class="form-control form-control-lg" formControlName="fecha_abono">
+                    </div>
+                    <div class="mb-4">
+                        <label for="debia" class="form-label"><h6>Departamento</h6></label>
+                        <select class="form-select form-select-lg mb-3" aria-label="Departamento">
+                          <option selected>Seleccione el departamento...</option>
+                          <option value="1">Uno</option>
+                          <option value="2">Dos</option>
+                          <option value="3">Tres</option>
+                        </select>
+                        <input type="text" id="debia" class="form-control form-control-lg" formControlName="debia">
+                    </div>
+                     <div class="row">
+                      <div class="col-sm-6">
+                        <div class="mb-4">
+                          <label for="cliente" class="form-label"><h6>Lugar</h6></label>
+                          <input type="text" id="cliente" class="form-control form-control-lg" formControlName="Cliente">
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="mb-4">
+                          <label for="ahora_debe" class="form-label"><h6>Tipo de Actividad</h6></label>
+                           <select class="form-select form-select-lg mb-3" aria-label="Departamento">
+                            <option selected>Seleccione el Tipo de Actividad...</option>
+                            <option value="1">Academica</option>
+                            <option value="2">Extra-escolares</option>
+                          </select>
+                          <input type="text" id="ahora_debe" class="form-control form-control-lg" formControlName="ahora_debe">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                         <div class="mb-4">
+                            <label for="cantidad_abonar" class="form-label"><h6>Número de Créditos</h6></label>
+                            <input type="text" id="cantidad_abonar" class="form-control form-control-lg" formControlName="cantidad_abonar">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-4">
+                          <label for="promotor" class="form-label"><h6>Horas para acreditar</h6></label>
+                          <input type="text" id="promotor" class="form-control form-control-lg" formControlName="Promotor">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                          <div class="mb-4">
+                            <label for="total_pagado" class="form-label"><h6>Número de participantes</h6></label>
+                            <input type="text" id="total_pagado" class="form-control form-control-lg" formControlName="total_pagado">
+                          </div>
+                      </div>
+                    </div> 
+                    <div class="mb-4">
+                        <label for="cambio" class="form-label"><h6>Descripcion</h6></label>
+                        <textarea type="text" class="form-control form-control-lg" id="descripcion" rows="3" formControlName="descripcion"></textarea>
+                    </div>
+                    
+                </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- Modal #verRegistro -->
+ <div class="modal fade" id="Ver" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Actividad Complementaria</h5>
+        <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="p-4">
+           <form class="mb-2"  #f="ngForm"  novalidate>
+                <div class="row">
+                    <div class="col-md-12 mb-4">
+                        <label for="act_gnral" class="form-label"><h6>Actividad General</h6></label>
+                        <input type="text" id="act_gnral" name="act_gnral"  [(ngModel)]="actComplementaria.act_gnral" class="form-control" readonly>
+                    </div>
+                    <div class="col-md-12 mt-2 mb-4">
+                        <label for="act_especifica" class="form-label"><h6>Actividad Especifica</h6></label>
+                        <textarea class="form-control"  [(ngModel)]="actComplementaria.act_especifica" name="act_especifica" rows="2" disabled></textarea>
+                        <!-- <input type="text" id="act_especifica" name="act_especifica"  [(ngModel)]="actComplementaria.act_especifica"  class="form-control " readonly> -->
+                    </div>
+                    <div class="col-md-3 mb-md-0 mb-4">
+                        <div class="mb-3 row">
+                            <label  class="form-label">Credito</label>
+                            <div class="col-sm-8">
+                                <select class="no-arrow form-select mb-3" [(ngModel)]="actComplementaria.credito" name="credito" disabled><!---->
+                                    <option selected value="" disabled>Seleccione el credito...</option>
+                                    <option value="1">⭐</option>
+                                    <option value="2">⭐⭐</option>
+                                    <option value="3">⭐⭐⭐</option>
+                                    <option value="4">⭐⭐⭐⭐</option>
+                                    <option value="5">⭐⭐⭐⭐⭐</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-md-0 mb-4">
+                        <div class="mb-3 row">
+                            <label for="max_creditos" class="form-label"><h6>Maximo de creditos</h6></label>
+                            <div class="col-sm-8">
+                                <select class="no-arrow form-select mb-3" id="max_creditos" name="max_creditos" [(ngModel)]="actComplementaria.max_creditos" disabled><!---->
+                                    <option selected value="" disabled>Seleccione el credito...</option>
+                                    <option value="1">⭐</option>
+                                    <option value="2">⭐⭐</option>
+                                    <option value="3">⭐⭐⭐</option>
+                                    <option value="4">⭐⭐⭐⭐</option>
+                                    <option value="5">⭐⭐⭐⭐⭐</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-md-0 mb-4">
+                        <div class="mb-3 row">
+                            <label for="tipo" class="form-label">Tipo de Actividad</label>
+                            <input type="text" id="tipo" name="tipo" [(ngModel)]="actComplementaria.tipo" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-2 mb-md-0 mb-4">
+                        <label  class="form-label">Lugar</label>
+                        <input type="text" id="lugar" [(ngModel)]="actComplementaria.lugar" name="lugar" class="form-control " autocomplete="off" readonly>
+                    </div>
+                    <div class="col-md-6 mt-4 mb-4">
+                        <label  class="form-label">Numero de participantes</label>
+                        <input type="text" id="num_participantes" [(ngModel)]="actComplementaria.num_participantes" name="num_participantess" class="form-control" autocomplete="off" readonly>
+                    </div>
+                    <div class="col-md-6 mt-4 mb-4">
+                        <label  class="form-label">Duracion de la actividad</label>
+                        <input type="text" id="tiempo" [(ngModel)]="actComplementaria.tiempo" name="tiempo"  class="form-control " autocomplete="off" readonly>
+                    </div>
+                    <div class="col-md-12 mt-2 mb-4">
+                        <label for="exampleFormControlTextarea1" class="form-label">Descripcion</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" [(ngModel)]="actComplementaria.descripcion" name="descripcion" rows="3" disabled></textarea>
+                    </div>
+                    <h4 class="d-flex justify-content-center">Evidencias comprobatorias.</h4>
+                      <ul class="mt-2">
+                        <li *ngFor="let evdcom of evdCompro" class="p-2 mb-2">
+                          <div class="d-flex flex-column">
+                              <h4 class="mb-3 text-sm">{{evdcom.evd_pres_des}}</h4>
+                          </div>
+                        </li>    
+                      </ul>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+<!-- <router-outlet></router-outlet> -->

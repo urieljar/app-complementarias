@@ -1,0 +1,68 @@
+.app-card {
+  position: relative;
+  background: #fff;
+  border-radius: 0.25rem;
+}
+.app-page-title {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  margin-bottom: 1.5rem;
+}
+.app-card .app-card-body .app-card-actions {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 10;
+  right: 0.75rem;
+  top: 0.75rem;
+}
+.app-card.border-left-decoration {
+   box-shadow: 0.5px 0.5px 3px 0.5px #1b396b;
+  /* border-left: 2px solid #1b396b; */
+}
+.app-card .app-card-body .app-card-actions:hover {
+  background: #f5f6fe;
+}
+.app-card .app-card-body .app-card-actions .dropdown-menu {
+  font-size: 0.8125rem;
+}
+.app-card .app-card-header {
+  border-bottom: 1px solid #e7e9ed;
+}
+.app-card .app-card-title {
+  font-size: 1.5rem;
+  /* margin-bottom: 0; */
+}
+.app-card .card-header-action {
+  font-size: 0.875rem;
+}
+.app-card .card-header-action a:hover {
+  text-decoration: underline;
+}
+.app-card .form-select-holder {
+  display: inline-block;
+}
+.app-card .btn-close {
+  padding: 1rem;
+}
+.app-card .btn-close:focus {
+  box-shadow: none;
+}
+.app-card-stat {
+  text-align: center;
+}
+.app-card-stat .stats-type {
+  font-size: 0.875rem;
+  color: #828d9f;
+  text-transform: uppercase;
+}
+.app-card-stat .stats-figure {
+  font-size: 2rem;
+  color: #252930;
+}
+.title {
+  font-size: 1rem;
+}

@@ -1,0 +1,91 @@
+<div class="container mt-2 px-2">
+      <div class="row py-5">
+        <div class="col-lg-12 mx-auto">
+          <div class="text-white p-5 shadow-sm rounded banner">
+            <h1 class="display-4">Actividades Extraescolares</h1>
+            <p class="lead">Evaluación de Alumnos.</p>
+            <p class="lead">Listado de alumnos para evaluar, seleccione el alumno para calificar .
+            </p> 
+          </div>
+        </div>
+      </div>
+     <div class="mb-2 d-flex justify-content-between align-items-center">
+        <div class="container-fluid">
+            <div class="row height d-flex align-items-center">
+                <div class="search">
+                    <div class="col-md-8">
+                        <form class="d-flex">
+                            <i class="fa fa-search"></i>
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="px-8">
+            <!-- Example split danger button -->
+            <div class="dropdown">
+                    <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Filtros
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown">
+                        <li><a class="dropdown-item" href="#">ELECTRONICA</a></li>
+                        <li><a class="dropdown-item" href="#">GESTION EMPRESARIAL</a></li>
+                        <li><a class="dropdown-item" href="#">TIC'S</a></li>
+                        <li><a class="dropdown-item" href="#">QUIMICA</a></li>
+                        <li><a class="dropdown-item" href="#">ACUICULTURA</a></li>
+                    </ul>
+                </div>
+        </div>
+    </div>
+    <br>
+    <div class="table-responsive">
+        <table class="table table-responsive table-borderless">
+            <thead class="thead-primary">
+                <tr> <!--class="bg-light"-->
+                <!-- <th scope="col" width="5%"><input class="form-check-input" type="checkbox"></th> -->
+                <th scope="col" width="10%">No.Control</th>
+                <th scope="col" width="20%">Nombre</th>
+                <th scope="col" width="25%">Carrera</th>
+                <th scope="col" width="30%">Actividad academica</th>
+                <th scope="col" width="5%">Evaluar</th>
+                <!-- <th scope="col" class="text-end" width="20%"><span>Revenue</span></th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let solicitud of solicitudes; index as i;">
+                <!-- <th scope="row"><input class="form-check-input" type="checkbox"></th> -->
+                <td>{{solicitud.no_control}}</td>
+                <td>{{solicitud.alumno}}</td>
+                <td>{{solicitud.carrera}}</td>
+                <td>{{solicitud.act_complementaria}}.</td>
+                <td>
+                    <button class="btn btn-outline-success" (click)="evaluar(solicitud)">
+                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    </button>
+                </td>
+                <!-- <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">Paid</span></td> -->
+                <!-- <td><img src="https://i.imgur.com/VKOeFyS.png" width="25"> Althan Travis</td> -->
+                <!-- <td class="text-end"><span class="fw-bolder">$0.99</span> <i class="fa fa-ellipsis-h  ms-2"></i></td> -->
+                </tr>
+            </tbody>
+        </table>
+        <div class="example">
+            <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+                <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+            </nav>
+        </div>
+        
+    </div>
+</div>

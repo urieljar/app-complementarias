@@ -1,0 +1,90 @@
+<div class="container-lg mt-md-5">
+    <div class="body" >
+        <br>
+        <div class="text-center">
+            <div class="form-signin">
+                <div class="box">
+                    <div class="pt-2">
+                        <img src="assets/img/Alumno.png">
+                        <div class="col">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#loginalumno">
+                                ALUMNO
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <img src="assets/img/Jefe.png">
+                        <div class="col"> 
+                           <!--<a routerLink="/jefedepa">JEFE DE DEPARTAMENTO</a>-->
+                            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#loginjefedepartamento">
+                                PERSONAL DEL INSTITUCION
+                            </button>
+                        </div>
+                    </div>
+                    <br>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="loginalumno" tabindex="-1" aria-labelledby="loginalumnoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="myform">
+                <h1 class="text-center">Alumno</h1>
+                <form id="loginform" autocomplete="off" [formGroup]="miformulario" (ngSubmit)="accedeAlumno()">
+                    <div class="mb-3 mt-4">
+                        <label for="no_control" class="form-label">Número de control</label>
+                        <input type="text" class="form-control" id="no_control" placeholder="Numero de control" formControlName="no_control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nip" class="form-label">Nip</label>
+                        <input type="password" class="form-control" id="nip" placeholder="Nip" formControlName="nip">
+                    </div>
+                    <div class="row">
+                        <div class="col text-danger">
+                            <p *ngIf="campoNoValido('no_control')">* El numero control es obligatorio</p>
+                            <p *ngIf="campoNoValido('nip')">* El nip es obligatorio</p>
+                        </div>
+                    </div>
+                    <button type="submit" data-bs-dismiss="modal" class="btn btn-light mt-3">Iniciar Sesion</button>             
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="loginjefedepartamento" tabindex="-1" aria-labelledby="jefedepartamentoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="myform">
+                <h1 class="text-center">Personal</h1>
+                <form id="loginJfdpto" autocomplete="off" [formGroup]="formJefeDepa" (ngSubmit)="accedeJfDpto()">
+                    <div class="mb-3 mt-4">
+                        <label for="rfc" class="form-label">RFC</label>
+                        <input type="text" class="form-control" id="rfc" placeholder="RFC" formControlName="rfc">
+                    </div>
+                    <div class="mb-3">
+                        <label for="clave" class="form-label">Clave</label>
+                        <input type="password" class="form-control" id="clave" placeholder="Clave" formControlName="clave" >
+                    </div>
+                    <div class="row">
+                        <div class="col text-danger">
+                            <p *ngIf="campoNoValido2('rfc')">El RFC es obligatorio</p>
+                            <p *ngIf="campoNoValido2('clave')">La Clave es obligatorio</p>
+                        </div>
+                    </div>
+                    <button type="submit" data-bs-dismiss="modal" class="btn btn-light mt-3">Iniciar Sesion</button>             
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
