@@ -1,33 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
-
 body{
-    font-family: 'Open Sans', sans-serif;
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+  font-family: 'Open Sans', sans-serif;
 }
 .search{
   top:6px;
   left:10px;
 }
+.green{
+  color:green;
+}
 .form-control{
-    
-    border:none;
-    padding-left:32px;
+  border:none;
+  padding-left:32px;
 }
 .form-control:focus{
-    
     border:none;
     box-shadow:none;
 }
 .table thead.thead-primary{
   background: #1b396b
-
 }
-.table th{
-    color: #fff;
+.table th{    
+  color: #fff;
 }
 .example .pagination>li>a,
 .example .pagination>li>span {
   border: 1px solid #1b396b;
-
 }
 .pagination>li.active>a {
   background: #1b396b;

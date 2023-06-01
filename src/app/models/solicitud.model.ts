@@ -7,7 +7,7 @@ export class Solicitud {
         public alumno: string,
         public no_control: string,
         public carrera: string,
-        public valor_numerico?: number,
+        public valor_numerico: number,
         public observacion?: string,
         public status?: number,
         public id?: string
