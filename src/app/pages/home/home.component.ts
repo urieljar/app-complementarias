@@ -27,6 +27,7 @@ export class HomeComponent {
                 private fb2: FormBuilder,
                private usuarioService:UsuarioService){}
   accedeAlumno(){
+    let timerInterval: any;
     this.formSubmitted = true; //envia el formulario posteado
     console.log(this.miformulario.value);
     if(this.miformulario.valid){
@@ -34,17 +35,26 @@ export class HomeComponent {
       this.usuarioService.accederAlumno(this.miformulario.value)
           .subscribe(  res =>{
             //window.location.reload();//recarga la pagina actual
-            Swal.fire('Hola!', 'Usuario Autenticado', 'success').then((result) => {
-              //location.reload();
-              this.router.navigate(['/alumnos']);
-              // this.router.navigateByUrl('/alumnos');
+            Swal.fire({
+              title: 'Entrando al sistema!!!',
+              html:
+                'Espere 5 segundos!' +
+                '</button>',
+              timer: 5000,
+              didOpen: () => {
+                Swal.showLoading()
+              },
+              willClose: () => {
+                this.router.navigate(['/alumnos']);
+                //location.reload();
+                // this.router.navigateByUrl('/alumnos');
+                clearInterval(timerInterval)
+              }
             });
             localStorage.setItem('no_control', res.data.no_control);
             localStorage.setItem('nombre_completo', res.data.nombre_completo);
             localStorage.setItem('carrera', res.data.carrera);
-
             console.log('Usuario entrado');
-            
             // this.router.navigate(['/alumnos']);
             console.log(res);
           },(err)=>{
@@ -63,6 +73,7 @@ export class HomeComponent {
     // }
   }
   accedeJfDpto(){
+    let timerInterval: any;
     this.formSubmitted = true; //envia el formulario posteado
     console.log(this.formJefeDepa.value);
     if (this.formJefeDepa.valid) {
@@ -75,29 +86,56 @@ export class HomeComponent {
           console.log(res.data);
           if (res.data.departamento == 1) {
             //acceso al panel del administrador 
-            Swal.fire('Hola!', 'Usuario Autenticado', 'success').then(result => {
-               //location.reload();
+            Swal.fire({
+              title: 'Entrando al sistema!!!',
+              html:
+                'Espere 3 segundos!' +
+                '</button>',
+              timer: 3000,
+              didOpen: () => {
+                Swal.showLoading()
+              },
+              willClose: () => {
                 this.router.navigate(['/administracion']);
+                //location.reload();
+                // this.router.navigateByUrl('/alumnos');
+                clearInterval(timerInterval)
+              }
             });
-            // this.router.navigateByUrl('/administracion');
           } else if (res.data.departamento==2){
             //acceso al panel del extraescolares
-              Swal.fire('Hola!', 'Usuario Autenticado', 'success').then(result => {
-                //location.reload();
+            Swal.fire({
+              title: 'Entrando al sistema!!!',
+              html:
+                'Espere 3 segundos!' +
+                '</button>',
+              timer: 3000,
+              didOpen: () => {
+                Swal.showLoading()
+              },
+              willClose: () => {
                 this.router.navigateByUrl('/jefe-extra');
-              });
-           
-          } else if (res.data.departamento == 3 || res.data.departamento == 4 || res.data.departamento == 5){
-            
-            Swal.fire('Hola!', 'Usuario Autenticado', 'success').then(result => {
-              //location.reload();
-              this.router.navigateByUrl('/jefe-academica');
-            }); 
+                clearInterval(timerInterval)
+              }
+            });
+          } else if (res.data.departamento == 3 || res.data.departamento == 4 || res.data.departamento == 5 || res.data.departamento == 6){
+            Swal.fire({
+              title: 'Entrando al sistema!!!',
+              html:
+                'Espere 3 segundos!' +
+                '</button>',
+              timer: 3000,
+              didOpen: () => {
+                Swal.showLoading()
+              },
+              willClose: () => {
+                this.router.navigateByUrl('/jefe-academica');
+                clearInterval(timerInterval)
+              }
+            });
           }
           localStorage.setItem('rfc', res.data.rfc);
           localStorage.setItem('departamento', res.data.departamento);
-          // this.router.navigateByUrl('/jefe-academica');
-          
         }, (err) => {
           Swal.fire('Error', err.error.mensaje, 'error');
           console.log(err.error.mensaje);

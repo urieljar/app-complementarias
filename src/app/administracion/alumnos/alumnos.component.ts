@@ -206,7 +206,8 @@ export class AlumnosComponent implements OnInit {
     this.alumno.a_paterno = this.formulario.value.a_paterno.toUpperCase();
     this.alumno.a_materno = this.formulario.value.a_materno.toUpperCase();
     this.alumno.carrera = this.formulario.value.carrera;
-
+    this.alumno.email = '';
+    this.alumno.telefono = '';
     this.alumnoService.postAlumno(this.alumno).subscribe((res: any) => {
       console.log(res);
       this.openToast();

@@ -8,12 +8,16 @@
 .offcanvas{
   background-color: #1b396b;
 }
+
 .dropdown-menu{
-   background-color: #2e5aa6;
+  background-color: #2e5aa6;
+}
+.dropdown-item{
+  color: #e5e7ea;
 }
 .dropdown-item:focus, .dropdown-item:hover {
   color:#e5e7ea;
-  background-color: #2e5aa6;
+  background-color: #1b396b;
   
 }
 .navbar-toggler {

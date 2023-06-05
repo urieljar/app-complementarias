@@ -29,6 +29,7 @@ export class HomeComponent {
       //this.solicitudes = res.data.credito
       console.log(this.solicitudes);
     }, ((error: any) => {
+      this.bandera = false;
       console.log(error);
     }));
   }

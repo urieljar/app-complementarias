@@ -55,7 +55,7 @@
                                   </table>
                               </div>
                         </div>
-                        <div class="card-footer py-4">
+                        <!--<div class="card-footer py-4">
                             <nav aria-label="...">
                               <ul class="pagination justify-content-end mb-0">
                                 <li class="page-item disabled">
@@ -78,7 +78,7 @@
                                 </li>
                               </ul>
                             </nav>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Crear carrera para el Instituto</h5>
-        <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#Registro" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-toggle="modal" (click)="limpiarControls()" data-bs-target="#Registro" aria-label="Close"></button>
       </div>
       
         <div class="modal-body">
@@ -109,7 +109,7 @@
             <div class="mb-4">
               <label for="jdepto" class="form-label"><h6>Jefe de la carrera</h6></label>
               <select class="form-select form-select-lg mb-3" (change)="selectJdpto($event)" name="jdepto">
-                <option [ngValue]="null" disabled selected>Seleccione el jefe de la carrera...</option>
+                <option selected [ngValue]="null" disabled >Seleccione el jefe de la carrera...</option>
                 <option *ngFor="let jdepto of jdptos" [ngValue]="jdepto.rfc" value="{{jdepto.rfc}}">{{jdepto.nombre_completo}}</option>
               </select>
             </div>
@@ -117,7 +117,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-secondary" (click)="limpiarControls()" data-bs-dismiss="modal">Cancelar</button>
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="agregarCarrera()" [disabled]="!isValidSubmit">Guardar</button>
         </div>
       
@@ -130,7 +130,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Editar Actividad Complementaria</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="limpiarControls()"  aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="p-4">
@@ -154,8 +154,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" (click)="editarCarrera()" data-bs-dismiss="modal" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="limpiarControls()"  data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" (click)="editarCarrera()"  data-bs-dismiss="modal" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>

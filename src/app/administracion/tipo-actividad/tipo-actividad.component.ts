@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
   templateUrl: './tipo-actividad.component.html',
   styleUrls: ['./tipo-actividad.component.css']
 })
+
 export class TipoActividadComponent implements OnInit {
   TiposActs: TiposAct[] = [];
   tipoAct = new TipoActClase();
@@ -17,19 +18,19 @@ export class TipoActividadComponent implements OnInit {
   isValidSubmit: boolean = false;
   isbandera1: boolean = false;
   isbandera2: boolean = false;
-
   constructor(private router: Router,
     private tipoActService: TipoActividadService) { }
+
   ngOnInit(): void {
+    this.tipoAct.max_creditos = 'null';
     this.obtenerTiposActividades();
   }
   obtenerTiposActividades(){
     this.tipoActService.getTipoActividades().subscribe((res: any) => {
       this.TiposActs = res.data;
-      console.log(this.TiposActs);
-      console.log(res);
+      //console.log(this.TiposActs);
+      //console.log(res);
       // this.dtTrigger.next(0);
-
     }, ((error: any) => {
       console.log(error);
     }));
@@ -39,14 +40,14 @@ export class TipoActividadComponent implements OnInit {
       (res: any) => {
         this.tipoAct = res['data'];
         // this.periodo = res.data;
-        console.log(this.tipoAct);
+        //console.log(this.tipoAct);
       }
     );
   }
   guardarTipoActividad(){
     console.log(this.tipoAct);
     this.tipoActService.postTipoActividad(this.tipoAct).subscribe((res: any) => {
-      console.log(res);
+      //console.log(res);
       this.openToast();
     }, (err: any) => {
       console.log('no se pudo guardar');
@@ -61,7 +62,7 @@ export class TipoActividadComponent implements OnInit {
     console.log(this.tipoAct);
     this.tipoActService.putTipoActividad(this.tipoAct).subscribe(
       res => {
-        console.log(res);
+        //console.log(res);
         this.openToast();
       },
       err => {
@@ -81,24 +82,31 @@ export class TipoActividadComponent implements OnInit {
       cancelButtonText: '¡No, quiero borrarlo!'
     }).then((result) => {
       if (result.value) {
-        Swal.fire(
-          'Eliminado!',
-          'Su archivo ha sido eliminado.',
-          'success',
+        Swal.fire({
+          title: 'Eliminado!',
+          icon: 'success',
+          text: 'Su archivo ha sido eliminado.',
+          showConfirmButton: false,
+          timer: 1000
+        }
         ).then((result) => {
           this.tipoActService.deleteTipoActividad(tipo.id).subscribe(
             (res: any) => {
-              this.tipoAct = res['data'];
-              console.log(this.tipoAct);
-              location.reload();
+              //this.tipoAct = res['data'];
+              this.obtenerTiposActividades();
+              this.limpiarControls();
             }
           );
         })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
-          'Cancelado',
-          'Su archivo ha sido cancelado. :)',
-          'error'
+          {
+            title: 'Cancelado',
+            icon: 'error',
+            text: 'Su archivo ha sido cancelado. :)',
+            showConfirmButton: false,
+            timer: 2800
+          }
         )
       }
     })
@@ -120,7 +128,7 @@ export class TipoActividadComponent implements OnInit {
   }
   eventCredito(valorInput: any) {
     this.tipoAct.max_creditos = valorInput.target.value;
-    console.log(this.tipoAct.max_creditos);
+    //console.log(this.tipoAct.max_creditos);
     this.isbandera2 = true;
     this.validacion();
   }
@@ -138,7 +146,7 @@ export class TipoActividadComponent implements OnInit {
       toast: true,
       position: 'top-end',
       showConfirmButton: false,
-      timer: 3000,
+      timer: 1000,
       timerProgressBar: true,
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -149,7 +157,9 @@ export class TipoActividadComponent implements OnInit {
       icon: 'success',
       title: 'Guardado correctamente.'
     }).then((result) => {
-      this.refresh();
+      this.obtenerTiposActividades();
+      this.limpiarControls();
+      //this.refresh();
     })
   }
   mensajeError(mensaje: string) {
@@ -163,5 +173,13 @@ export class TipoActividadComponent implements OnInit {
         this.router.navigate(['/administracion/tipos-actividad']);
       }
     })
+  }
+  limpiarControls(): void {
+    this.tipoAct.nombre = '';
+    this.tipoAct.max_creditos = 'null';
+    this.isValidSubmit =false;
+    this.isbandera1 = false;
+    this.isbandera2 = false;
+    this.validacion();
   }
 }

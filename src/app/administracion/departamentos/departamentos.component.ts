@@ -32,23 +32,32 @@ export class DepartamentosComponent implements OnInit{
     }).then((result) => {
       if (result.value) {
         Swal.fire(
-          'Eliminado!',
-          'Su archivo ha sido eliminado.',
-          'success',
+          {
+            title: 'Eliminado!',
+            icon: 'success',
+            text: 'Su archivo ha sido eliminado.',
+            showConfirmButton: false,
+            timer: 1000
+          }
         ).then(result=>{
           this.dptoService.deleteDpto(dpto.id).subscribe(
             (res: any) => {
               this.dpto = res['data'];
-              console.log(this.dpto);
-              this.refresh()
+              //console.log(this.dpto);
+              this.obtenerDptos();
+              //this.refresh()
             }
           )
         })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
-          'Cancelado',
-          'Su archivo ha sido cancelado. :)',
-          'error'
+          {
+            title: 'Cancelado',
+            icon: 'error',
+            text: 'Su archivo ha sido cancelado. :)',
+            showConfirmButton: false,
+            timer: 1000
+          }
         )
       }
     })
@@ -58,25 +67,28 @@ export class DepartamentosComponent implements OnInit{
       toast: true,
       position: 'top-end',
       showConfirmButton: false,
-      timer: 3000,
+      timer: 1000,
       timerProgressBar: true,
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
-        this.refresh();
       }
     });
     Toast.fire({
       icon: 'success',
       title: 'Signed in successfully'
+    }).then((result) => {
+      this.obtenerDptos();
+      this.limpiarControls()
+      //this.refresh();
     })
   }
   refresh(): void { window.location.reload(); }
   obtenerDptos() {
     this.dptoService.getDptos().subscribe((res: any) => {
       this.dptos = res.data;
-      console.log(this.dptos);
-      console.log(res);
+      //console.log(this.dptos);
+     // console.log(res);
     }, ((error: any) => {
       console.log(error);
     }));
@@ -106,7 +118,7 @@ export class DepartamentosComponent implements OnInit{
     // this.dpto.nombre = this.formulario.value.nombre.toUpperCase();//sirve para poner en mayuscula
     // console.log(this.dpto.nombre);
     this.dptoService.postDpto(this.dpto).subscribe((res: any) => {
-      console.log(res);
+      //console.log(res);
       this.openToast();
     }, (err: any) => {
       let mensajeErrorConEtiquetas = err.error.mensaje.errores;
@@ -118,7 +130,7 @@ export class DepartamentosComponent implements OnInit{
   editarDpto() {
     console.log(this.dpto);
     this.dptoService.putDpto(this.dpto).subscribe((res: any) => {
-      console.log(res);
+     // console.log(res);
       this.openToast();
     }, (err: any) => {
       let mensajeErrorConEtiquetas = err.error.mensaje.errores;
@@ -138,5 +150,9 @@ export class DepartamentosComponent implements OnInit{
         this.router.navigate(['/administracion/departamentos']);
       }
     })
+  }
+  limpiarControls(): void {
+    this.formulario.controls['nombre'].setValue('');
+    //this.formulario.reset();
   }
 }

@@ -69,7 +69,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" >Crear el tipo de actividad</h5>
-        <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#Registro" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-toggle="modal" (click)="limpiarControls()" data-bs-target="#Registro" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="p-4">
@@ -80,8 +80,8 @@
                 </div>
                 <div class="mb-4">
                     <label for="max_creditos" class="form-label"><h6>Maximo de creditos:</h6></label>
-                    <select class="form-select form-select-lg mb-3" (change)="eventCredito($event)" name="max_creditos"><!---->
-                      <option [ngValue]="null" selected disabled>Seleccione el numero de creditos...</option>
+                    <select class="form-select form-select-lg mb-3" [(ngModel)]="tipoAct.max_creditos" (change)="eventCredito($event)" name="max_creditos"><!---->
+                      <option selected value="null" disabled>Seleccione el numero de creditos...</option>
                       <option value="1">⭐</option>
                       <option value="2">⭐⭐</option>
                       <option value="3">⭐⭐⭐</option>
@@ -93,7 +93,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-secondary" (click)="limpiarControls()" data-bs-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="guardarTipoActividad()" [disabled]="!isValidSubmit">Guardar</button>
       </div>
     </div>
@@ -105,7 +105,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Editar Tipo de actividad</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="limpiarControls()" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="p-4">
@@ -132,7 +132,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-secondary" (click)="limpiarControls()" data-bs-dismiss="modal">Cancelar</button>
         <button (click)="editarTipoActividad()" data-bs-dismiss="modal" class="btn btn-primary">Guardar</button>
       </div>
     </div>

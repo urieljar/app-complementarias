@@ -4,6 +4,8 @@ export class AlumnoClase {
     nombre!: string;
     a_paterno!: string;
     a_materno!: string;
+    email !: string;
+    telefono!: string;
     carrera!: string;
 }
 export class AlumnoClase2 {

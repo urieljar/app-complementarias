@@ -51,15 +51,15 @@ export class CarrerasComponent implements OnInit {
       (res: any) => {
         // this.periodo = res['data'];
         this.carrera= res.data;
-        console.log(this.carrera);
+       // console.log(this.carrera);
       }
     );
   }
   //guardar registro
   agregarCarrera() {
-    console.log(this.carrera);
+   // console.log(this.carrera);
     this.carreraService.postCarrera(this.carrera).subscribe((res: any) => {
-      console.log(res);
+      //console.log(res);
       this.openToast();
     }, (err: any) => {
       console.log('no se pudo guardar');
@@ -144,24 +144,34 @@ private validateModel(valorInput: string) {
     }).then((result) => {
       if (result.value) {
         Swal.fire(
-          'Eliminado!',
-          'Su archivo ha sido eliminado.',
-          'success'
+          {
+            title: 'Eliminado!',
+            icon: 'success',
+            text: 'Su archivo ha sido eliminado.',
+            showConfirmButton: false,
+            timer: 1000
+          }
         ).then((result) => {
           console.log(carrera);
           this.carreraService.deleteCarrera(carrera.id).subscribe(
             (res: any) => {
-              this.carrera = res['data'];
-              console.log(this.carrera);
-              location.reload();
+              //this.carrera = res['data'];
+              //console.log(this.carrera);
+              //location.reload();
+              this.obtenerCarreras();
+              this.limpiarControls();
             }
           );
         })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
-          'Cancelado',
-          'Su archivo ha sido cancelado. :)',
-          'error'
+          {
+            title: 'Cancelado',
+            icon: 'error',
+            text: 'Su archivo ha sido cancelado. :)',
+            showConfirmButton: false,
+            timer: 1000
+          }
         )
       }
     })
@@ -183,7 +193,8 @@ private validateModel(valorInput: string) {
       title: 'Signed in successfully'
     }).then((result)=>{
       this.obtenerCarreras();
-      this.router.navigate(['/administracion/carreras']);
+      this.limpiarControls();
+      //this.router.navigate(['/administracion/carreras']);
     })
   }
   mensajeError(mensaje: string) {
@@ -197,5 +208,15 @@ private validateModel(valorInput: string) {
         this.router.navigate(['/administracion/carreras']);
       }
     })
+  }
+  limpiarControls(): void {
+    this.carrera.nombre = '';
+    this.carrera.nombre_corto = '';
+    
+    this.isbanderaC1 = false;
+    this.isbanderaC2 = false;
+    this.isbanderaC3 = false;
+    this.validacion();
+    //this.formulario.reset();
   }
 }
