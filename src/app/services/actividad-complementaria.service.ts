@@ -12,7 +12,7 @@ const base_url = 'http://apicomplementarias.test';
 export class ActividadComplementariaService {
   headerT = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http: HttpClient) { }
-  ///evidencias a presentas metodos para consumir mi api
+  ///actividad complementarias metodos para consumir mi api
   getEvdsPresentar() {
     return this.http.get<any[]>(`${base_url}/evidenciapresentar`);
   }

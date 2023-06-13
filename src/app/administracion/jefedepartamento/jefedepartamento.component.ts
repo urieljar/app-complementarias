@@ -60,6 +60,12 @@ export class JefedepartamentoComponent implements OnInit {
       }, [
         Validators.required
       ]),
+      abv: new FormControl({
+        value: '',
+        disabled: false
+      }, [
+        Validators.required
+      ]),
       clave: new FormControl({
         value: '',
         disabled: false
@@ -143,6 +149,8 @@ export class JefedepartamentoComponent implements OnInit {
         // this.periodo = res['data'];
         this.jdpto = res.data;
         console.log(this.jdpto);
+        this.formulario.controls['rfc'].setValue(this.jdpto.rfc);
+        this.formulario.controls['abv'].setValue(this.jdpto.av);
         this.formulario.controls['status'].setValue(this.jdpto.status);
         this.formulario.controls['nombre'].setValue(this.jdpto.nombre);
         this.formulario.controls['apellidos'].setValue(this.jdpto.apellidos);
@@ -151,7 +159,9 @@ export class JefedepartamentoComponent implements OnInit {
     );
   }
   limpiarControls():void{
+    this.formulario.controls['rfc'].setValue('');
     this.formulario.controls['status'].setValue('');
+    this.formulario.controls['abv'].setValue('');
     this.formulario.controls['nombre'].setValue('');
     this.formulario.controls['apellidos'].setValue('');
     this.formulario.controls['departamento'].setValue('');
@@ -162,6 +172,7 @@ export class JefedepartamentoComponent implements OnInit {
     this.jdpto.rfc = this.formulario.value.rfc.toUpperCase().replace(/\s{2,}/g, ' ').trim();//sirve para poner en mayuscula y elimina los espacios
     this.jdpto.nombre = this.formulario.value.nombre.toUpperCase();
     this.jdpto.apellidos = this.formulario.value.apellidos.toUpperCase();
+    this.jdpto.av = this.formulario.value.abv;
     this.jdpto.clave = this.formulario.value.clave;
     this.jdpto.status = this.formulario.value.status;
     this.jdpto.fecha_ingreso = this.formulario.value.fecha_ingreso;
@@ -170,7 +181,7 @@ export class JefedepartamentoComponent implements OnInit {
    // console.log(this.jdpto.rfc);
     //console.log(this.jdpto);
     this.jefedptoService.postJefeDpto(this.jdpto).subscribe((res: any) => {
-      console.log(res);
+      //console.log(res);
       this.openToast();
     }, (err: any) => {
       let mensajeErrorConEtiquetas = err.error.mensaje.errores;
@@ -184,12 +195,13 @@ export class JefedepartamentoComponent implements OnInit {
     // this.jdpto.rfc = this.formulario.value.rfc.toUpperCase().replace(/\s{2,}/g, ' ').trim();//sirve para poner en mayuscula y elimina los espacios
     this.jdpto.nombre = this.formulario.value.nombre.toUpperCase();
     this.jdpto.apellidos = this.formulario.value.apellidos.toUpperCase();
+    this.jdpto.av = this.formulario.value.abv;
     this.jdpto.status = this.formulario.value.status;
     this.jdpto.departamento = this.formulario.value.departamento;
-    console.log(this.jdpto);
+    //console.log(this.jdpto);
     this.jefedptoService.putJefeDpto(this.jdpto).subscribe(
       res => {
-        console.log(res);
+        //console.log(res);
         this.openToast();
       },
       err => {
@@ -211,15 +223,19 @@ export class JefedepartamentoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         Swal.fire(
-          'Eliminado!',
-          'Su archivo ha sido eliminado.',
-          'success',
+          {
+            title: 'Eliminado!',
+            icon: 'success',
+            text: 'Su archivo ha sido eliminado.',
+            showConfirmButton: false,
+            timer: 1000
+          }
         ).then((result) => {
           console.log(jefe);
           this.jefedptoService.deleteJefeDpto(jefe.rfc).subscribe(
             (res: any) => {
               this.jdpto = res['data'];
-              console.log(this.jdpto);
+              //console.log(this.jdpto);
               this.obtenerJefeDptos();
               // location.reload();
             }
@@ -227,9 +243,13 @@ export class JefedepartamentoComponent implements OnInit {
         })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
-          'Cancelado',
-          'Su archivo ha sido cancelado. :)',
-          'error'
+          {
+            title: 'Cancelado',
+            icon: 'error',
+            text: 'Su archivo ha sido cancelado. :)',
+            showConfirmButton: false,
+            timer: 1000
+          }
         )
       }
     })
@@ -253,12 +273,11 @@ export class JefedepartamentoComponent implements OnInit {
       toast: true,
       position: 'top-end',
       showConfirmButton: false,
-      timer: 3000,
+      timer: 1000,
       timerProgressBar: true,
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
-        
       },
     });
     Toast.fire({

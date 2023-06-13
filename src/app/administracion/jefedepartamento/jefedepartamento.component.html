@@ -93,10 +93,16 @@
           <div class="p-4">
             <form [formGroup]="formulario" novalidate>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="position-relative mb-4">
                         <label for="rfc" class="form-label" ><h6>RFC</h6></label>
                         <input type="text" id="rfc" formControlName="rfc" class="form-control mayuscula" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="mb-4">
+                        <label for="abv" class="form-label" ><h6>Abreviatura</h6></label>
+                        <input type="text" id="abv" formControlName="abv" class="form-control" autocomplete="off" required>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -124,11 +130,11 @@
                 </div>
                 <div class="col-sm-4">
                     <label for="status" class="form-label"><h6>Estado</h6></label>
-                        <select class="form-select mb-3" formControlName="status" (change)="obtenerstatus($event)" name="status" aria-label="Estado" ><!--(change)="status($event)"-->
-                            <option disabled value="" >Seleccione el Estado...</option>
-                            <option value='0'>Inactivo</option>
-                            <option value='1'>Activo</option>
-                        </select>
+                    <select class="form-select mb-3" formControlName="status" (change)="obtenerstatus($event)" name="status" aria-label="Estado" ><!--(change)="status($event)"-->
+                        <option disabled value="" >Seleccione el Estado...</option>
+                        <option value='0'>Inactivo</option>
+                        <option value='1'>Activo</option>
+                    </select>
                 </div>
             </div>
             <div class="row">
@@ -182,10 +188,16 @@
         <div class="p-4">
            <form class="mb-2" [formGroup]="formulario" novalidate>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="position-relative mb-4">
                         <label for="rfc" class="form-label" ><h6>RFC</h6></label>
                         <input type="text" id="rfc" formControlName="rfc" class="form-control mayuscula" value="{{this.jdpto.rfc}}" autocomplete="off" readonly>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="mb-2">
+                        <label for="abv" class="form-label" ><h6>Abreviatura</h6></label>
+                        <input type="text" id="abv" formControlName="abv" class="form-control" autocomplete="off" value="{{this.jdpto.av}}" required>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -200,7 +212,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-4">
-                    <div class="mb-4">
+                    <div class="mb-2">
                         <label for="nombre" class="form-label"><h6>Nombre</h6></label>
                         <input type="text" id="nombre" formControlName="nombre" class="form-control mayuscula" autocomplete="off"  value="{{this.jdpto.nombre}}" required>
                     </div>
@@ -273,10 +285,16 @@
         <div class="p-4">
            <form class="mb-2" [formGroup]="formulario" novalidate>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="position-relative mb-4">
                         <label for="rfc" class="form-label" ><h6>RFC</h6></label>
                         <input type="text" id="rfc" formControlName="rfc" class="form-control mayuscula" value="{{this.jdpto.rfc}}" autocomplete="off" readonly>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="mb-4">
+                        <label for="abv" class="form-label" ><h6>Abreviatura</h6></label>
+                        <input type="text" id="abv" formControlName="abv" class="form-control" value="{{this.jdpto.av}}" autocomplete="off" readonly>
                     </div>
                 </div>
                 <div class="col-sm-6">

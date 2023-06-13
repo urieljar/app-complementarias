@@ -94,8 +94,11 @@ export class AlumnosComponent implements OnInit {
       this.totalAlumnos = res.data.total;
       this.totalPaginas = res.data.paginas;
       this.paginaActual = index;
-      console.log(this.alumnos);
-      console.log(index);
+      if (index == this.totalPaginas && index == 1) {
+        this.anterior = false;
+        this.siguiente = true;
+        return
+      }
       if (index == 1) {
         this.anterior = false;
         this.siguiente = false;
@@ -143,7 +146,7 @@ export class AlumnosComponent implements OnInit {
       this.alumnos = this.alumnosTemp;
     } else if (termino.length > 0){
     this.alumnoService.buscarAlumno(termino).subscribe((res:any)=>{
-      console.log(res.data);
+      //console.log(res.data);
       this.alumnos = res.data;
     }),((error: any) => {
       console.log(error);
@@ -154,7 +157,7 @@ export class AlumnosComponent implements OnInit {
     this.isAll = false;
     this.carreraActual= carrera;
     this.alumnoService.buscarAumnoCarrera(this.carreraActual, index).subscribe((res: any) => {
-      console.log(res.data);
+      //console.log(res.data);
       this.totalAlumnos = res.data.total;
       this.totalPaginas = res.data.paginas;
       this.paginaActual = index;
@@ -192,7 +195,7 @@ export class AlumnosComponent implements OnInit {
       this.formulario.controls['a_materno'].setValue(this.alumno.a_materno);
       this.formulario.controls['a_paterno'].setValue(this.alumno.a_paterno);
       this.formulario.controls['carrera'].setValue(this.alumno.carrera);
-      console.log(this.alumno);
+      //console.log(this.alumno);
     }), ((err: any) => {
       console.log(err.error.mensaje);
     });
@@ -209,7 +212,7 @@ export class AlumnosComponent implements OnInit {
     this.alumno.email = '';
     this.alumno.telefono = '';
     this.alumnoService.postAlumno(this.alumno).subscribe((res: any) => {
-      console.log(res);
+      //console.log(res);
       this.openToast();
     }, (err: any) => {
       let mensajeErrorConEtiquetas = err.error.mensaje.errores;
@@ -252,24 +255,33 @@ export class AlumnosComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         Swal.fire(
-          'Eliminado!',
-          'Su archivo ha sido eliminado.',
-          'success',
+          {
+            title: 'Eliminado!',
+            icon: 'success',
+            text: 'Su archivo ha sido eliminado.',
+            showConfirmButton: false,
+            timer: 1000
+          }
         ).then((result) => {
           console.log(alumno);
           this.alumnoService.deleteAlumno(alumno.no_control).subscribe(
             (res: any) => {
               this.alumno = res['data'];
               console.log(this.alumno);
-              location.reload();
+              //location.reload();
+              this.cargarAlumnos(this.paginaActual);
             }
           );
         })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
-          'Cancelado',
-          'Su archivo ha sido cancelado. :)',
-          'error'
+          {
+            title: 'Cancelado',
+            icon: 'error',
+            text: 'Su archivo ha sido cancelado. :)',
+            showConfirmButton: false,
+            timer: 1000
+          }
         )
       }
     })

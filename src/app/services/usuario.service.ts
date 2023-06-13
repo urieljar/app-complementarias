@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AlumnoForm } from '../interfaces/alumno-form.interface';
 import { Observable } from 'rxjs';
 import { JefeDepartmento } from '../interfaces/jefe-departamento.interface';
+import { CoordinadorForm } from '../interfaces/coordinador.interface';
 const base_url = 'http://apicomplementarias.test';
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class UsuarioService {
   accederJfDpto(formJefe: JefeDepartmento): Observable<any> {
     console.log('posteando usuario');
     return this.http.post(`${base_url}/jefes/login`, formJefe, { headers: this.headerT });
+  }
+  accederCoordinador(formCoordinador: CoordinadorForm): Observable<any> {
+    console.log('posteando usuario');
+    return this.http.post(`${base_url}/coordinadores/login`, formCoordinador, { headers: this.headerT });
   }
   
 

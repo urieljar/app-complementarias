@@ -131,7 +131,7 @@ export class EditarActividadComponent implements OnInit {
      // this.EvdsPresentar2
      // const elemento = this.EvdsPresentar.indexOf(evdPre);
      // this.EvdsPresentar.splice(elemento, 1);
-     console.log(this.EvdsPresentar);
+     //console.log(this.EvdsPresentar);
     this.resultadosEvdPresentar()
     }, ((error: any) => {
       console.log(error);
@@ -340,7 +340,7 @@ export class EditarActividadComponent implements OnInit {
             position: 'top-right',
             iconColor: 'white',
             color: 'white',
-            background: '#f27474',
+            background: '#3fc3ee',
             showConfirmButton: false,
             timer: 1250,
             timerProgressBar: true,
@@ -368,7 +368,8 @@ export class EditarActividadComponent implements OnInit {
           position: 'top-right',
           iconColor: 'white',
           color: 'white',
-          background: '#1b396b',
+          background: '#f27474',
+  
           showConfirmButton: false,
           timer: 1250,
           timerProgressBar: true,
@@ -416,7 +417,7 @@ export class EditarActividadComponent implements OnInit {
       toast: true,
       position: 'top-end',
       showConfirmButton: false,
-      timer: 1000,
+      timer: 2000,
       timerProgressBar: true,
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)

@@ -336,9 +336,13 @@ export class CrudActividadComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         Swal.fire(
-          'Eliminado!',
-          'Su archivo ha sido eliminado.',
-          'success',
+          {
+            title: 'Eliminado!',
+            icon: 'success',
+            text: 'Su archivo ha sido eliminado.',
+            showConfirmButton: false,
+            timer: 1000
+          }
         ).then((result) => {
           console.log(evdPre);
           this.evdPreService.deleteEvdPresentar(evdPre.id).subscribe(
@@ -352,9 +356,13 @@ export class CrudActividadComponent implements OnInit {
         })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
-          'Cancelado',
-          'Su archivo ha sido cancelado. :)',
-          'error'
+          {
+            title: 'Cancelado',
+            icon: 'error',
+            text: 'Su archivo ha sido cancelado. :)',
+            showConfirmButton: false,
+            timer: 1000
+          }
         )
       }
     })

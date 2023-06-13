@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     this.tipo = '1';
     this.actComplementariaService.getTipoActComplementarias(this.tipo).subscribe((res: any) => {
       this.complementarias = res.data;
-      console.log(this.complementarias);
+      //console.log(this.complementarias);
       // console.log(res);
     }, ((error: any) => {
       console.log(error);
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   obtenerActComplementaria(act: any) {
     this.actComplementariaService.getActComplementaria2(act.id).subscribe((res: any) => {
       this.actComplementaria = res.data;
-      console.log(this.actComplementaria);
+      //console.log(this.actComplementaria);
       this.obtenerEvdComprobatorias(this.actComplementaria);
       // console.log(res);
 
@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
   obtenerEvdComprobatorias(evdComprobatorias: any) {
     this.actComplementariaService.getEvdComprobatorias(evdComprobatorias.id).subscribe((res: any) => {
       this.evdCompro = res.data;
-      console.log(this.evdCompro);
+     // console.log(this.evdCompro);
       // console.log(res);
 
     }, ((error: any) => {

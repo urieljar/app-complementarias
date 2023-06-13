@@ -1,26 +1,22 @@
-export interface JefeDepartmento {
+export interface CoordinadorForm {
     rfc: string,
     clave: string
 }
-export class JefeDptoClase {
+export class CoordinadorClase {
     rfc !: string;
     av !: string;
     nombre !: string;
     apellidos!: string;
     clave!: string;
-    fecha_ingreso!: string;
-    fecha_termina!: string;
     status!: number;
-    departamento!: number
+    jdepto!: string;
 }
-export interface JefeDptoInterface {
+export interface CoordinadorInterface {
     rfc: string,
     av: string,
     nombre: string,
     apellidos: string,
     clave: string,
-    fecha_ingreso: string,
-    fecha_termina: string,
     status: number,
-    departamento: number
+    jdepto: string,
 }

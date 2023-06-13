@@ -1,7 +1,6 @@
 export class Solicitud {
     constructor(
         public periodo: string,
-        public jdepto: string,
         public created_at: string,
         public act_complementaria: string,
         public alumno: string,

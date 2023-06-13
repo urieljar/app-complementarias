@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { EvaluacionComponent } from './evaluacion/evaluacion.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import { PerfilComponent } from './perfil/perfil.component';
   ],
   imports: [
     CommonModule,
-    CoordinadorRoutingModule
+    CoordinadorRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class CoordinadorModule { }

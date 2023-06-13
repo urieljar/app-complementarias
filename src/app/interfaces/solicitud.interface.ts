@@ -5,9 +5,8 @@ export class SolicitudClase {
     created_at!: string;
     valor_numerico!: number;
     periodo!: string;
-    jdepto!: string;
     alumno!: string;
-    act_complementaria!: string;
+    act_coordinada!: string;
 }
 export interface SolicitudInterface {
     id: string,
@@ -16,7 +15,6 @@ export interface SolicitudInterface {
     created_at: string,
     valor_numerico: number,
     periodo: string,
-    jdepto: string,
     alumno: string,
-    act_complementaria: string
+    act_coordinada: string
 }

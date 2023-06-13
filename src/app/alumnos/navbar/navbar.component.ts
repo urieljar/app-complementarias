@@ -7,13 +7,10 @@ import { SolicitudService } from 'src/app/services/solicitud.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   constructor(private router: Router,
     private solicitudService: SolicitudService) { }
-  ngOnInit(): void {
-   
 
-  }
  
   limpiarStorage(){
     localStorage.removeItem('no_control');

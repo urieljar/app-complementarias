@@ -119,8 +119,8 @@ export class RegistroComponent implements OnInit {
     this.solicitud.alumno = this.formulario.value.alumno;
     this.solicitud.created_at = this.ahora;
     this.solicitud.periodo = this.formulario.value.periodo;
-    this.solicitud.act_complementaria = this.formulario.value.act_complementaria;
-    this.solicitud.jdepto = 'VAFG680629GC0';
+    // this.solicitud.act_complementaria = this.formulario.value.act_complementaria;
+    // this.solicitud.jdepto = 'VAFG680629GC0';
     this.solicitud.valor_numerico= 0.00;
     this.solicitud.observacion = this.formulario.value.observacion;
     this.solicitud.status= 0;
@@ -171,7 +171,7 @@ export class RegistroComponent implements OnInit {
     this.formulario.controls['alumno'].setValue('');
     this.formulario.controls['act_complementaria'].setValue('');
     this.formulario.controls['observacion'].setValue('');
-    this.formulario.controls['periodo'].setValue('');
+//this.formulario.controls['periodo'].setValue('');
     this.isValidSubmit = false;
     this.isbandera1 = false;
   }

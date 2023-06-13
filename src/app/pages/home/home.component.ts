@@ -75,7 +75,7 @@ export class HomeComponent {
   accedeJfDpto(){
     let timerInterval: any;
     this.formSubmitted = true; //envia el formulario posteado
-    console.log(this.formJefeDepa.value);
+   // console.log(this.formJefeDepa.value);
     if (this.formJefeDepa.valid) {
       //realizar el posteo
       this.usuarioService.accederJfDpto(this.formJefeDepa.value)
@@ -83,7 +83,7 @@ export class HomeComponent {
           // Swal.fire('Hola!', 'Usuario Autenticado', 'success').then(result => {
           //   location.reload();
           // });
-          console.log(res.data);
+          //console.log(res.data);
           if (res.data.departamento == 1) {
             //acceso al panel del administrador 
             Swal.fire({
@@ -118,7 +118,7 @@ export class HomeComponent {
                 clearInterval(timerInterval)
               }
             });
-          } else if (res.data.departamento == 3 || res.data.departamento == 4 || res.data.departamento == 5 || res.data.departamento == 6){
+          } else if (res.data.departamento == 3 || res.data.departamento == 4 || res.data.departamento == 5 || res.data.departamento == 7){
             Swal.fire({
               title: 'Entrando al sistema!!!',
               html:
@@ -140,6 +140,30 @@ export class HomeComponent {
           Swal.fire('Error', err.error.mensaje, 'error');
           console.log(err.error.mensaje);
         });
+      this.usuarioService.accederCoordinador(this.formJefeDepa.value).subscribe(
+        (res: any) =>{
+          Swal.fire({
+            title: 'Entrando al sistema!!!',
+            html:
+              'Espere 3 segundos!' +
+              '</button>',
+            timer: 3000,
+            didOpen: () => {
+              Swal.showLoading()
+            },
+            willClose: () => {
+              this.router.navigate(['/coordinacion']);
+              clearInterval(timerInterval)
+            }
+          });
+          localStorage.setItem('rfc', res.data.rfc);
+          //localStorage.setItem('departamento', res.data.departamento);
+        },
+        (err) => {
+          Swal.fire('Error', err.error.mensaje, 'error');
+          console.log(err.error.mensaje);
+        }
+      );
     } else {
       return console.log('No se puede entrar.');;
     }

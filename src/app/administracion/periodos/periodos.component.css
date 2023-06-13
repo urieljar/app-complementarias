@@ -111,6 +111,11 @@ h6{
 .btn-primary{
   background-color: #1b396b;
 }
+.btn-primary:hover{
+  color: #1b396b;
+  background-color: #ffffff;
+  border-color: #1b396b;
+}
 .btn-secondary{
   background: #ee3e3e;
 }

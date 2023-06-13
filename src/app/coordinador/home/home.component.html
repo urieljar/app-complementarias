@@ -1,52 +1,51 @@
 <div class="app-content pt-3 p-md-3 p-lg-4">
-     <div class="container-xl">
-        <div class="app-card alert mb-4 border-left-decoration" role="alert">
-      <div class="inner">
-        <div class="app-card-body p-3 p-lg-4">
-          <h2 class="mb-3">Actividad Extraescolar</h2>
-          <div class="row gx-5 gy-3">
+  <div class="container-xl">
+    <div *ngFor="let actcoordinada of  actCoordinadas;" class="app-card alert mb-4 border-left-decoration" role="alert">
+    <div  class="inner">
+      <div  class="app-card-body p-3 p-lg-4">
+        <h2 class="mb-3">{{actcoordinada.act_gnral}}</h2>
+        <div class="row gx-5 gy-3">
+          <div class="col-12 col-lg-12">
+            <h5 class="card-title">{{actcoordinada.act_especifica}}</h5>
+          </div>
+          <div class="col-12 col-lg-9">
+            <label  class="form-label">Lugar: {{actcoordinada.lugar}}</label> 
+          </div>
             <div class="col-12 col-lg-9">
-							<h5 class="card-title">Actividades  para  la salud y la prevención: Futbol</h5>
-            </div>
-            <div class="col-12 col-lg-9">
-              <label  class="form-label">Lugar: Instituto tecnologico de salina cruz</label> 
-            </div>
-             <div class="col-12 col-lg-9">
-              <label  class="form-label">Jefe departamento: Ing. Anita de Carmen Morales Cruz</label> 
-            </div>
-            <div class="col-12 col-lg-4">
-              <label  class="form-label">Numero de participantes: 15</label> 
-            </div>
-           
-            <div class="col-6 col-lg-3">
-              <label  class="form-label">Duracion: 40 hrs</label> 
-            </div>
-            <div class="col-6 col-lg-3">
-              <label  class="form-label">Credito:⭐</label> 
-            </div>
-            <div class="col-12">
-              <label class="form-label d-flex justify-content-center">Evidencias Comprobatorias</label> 
-              <ul class="mt-2">
-                <li class="p-2">
-                    <div class="d-flex flex-column">
-                        <p class="text-sm">Constancia de acreditación expedida por el Director del Proyecto y Departamento Académico correspondiente.</p>
-                    </div>
-                </li>  
-                <li class="p-2">
-                    <div class="d-flex flex-column">
-                        <p class="text-sm">Constancia de participación en el evento.</p>
-                    </div>
-                </li> 
-                 <li class="p-2">
-                    <div class="d-flex flex-column">
-                        <p class="text-sm">Cumplir con el tiempo de su participación conforme al programa previamente autorizado.</p>
-                    </div>
-                </li>
-              </ul>
-            </div>
+            <label  class="form-label">Coordinador: {{actcoordinada.coordinador}}</label> 
+          </div>
+          <div class="col-12 col-lg-4">
+            <label  class="form-label">Numero de participantes: {{actcoordinada.num_participantes}}</label> 
+          </div>
+          
+          <div class="col-6 col-lg-3">
+            <label  class="form-label">Duracion: {{actcoordinada.tiempo}}</label> 
+          </div>
+          <div class="col-6 col-lg-3">
+            <label *ngIf="actcoordinada.credito == '1'" class="form-label">Credito: ⭐</label> 
+            <label *ngIf="actcoordinada.credito == '2'" class="form-label">Credito: ⭐⭐</label> 
+            <label *ngIf="actcoordinada.credito == '3'" class="form-label">Credito: ⭐⭐⭐</label> 
+            <label *ngIf="actcoordinada.credito == '4'" class="form-label">Credito: ⭐⭐⭐⭐</label> 
+            <label *ngIf="actcoordinada.credito == '5'" class="form-label">Credito: ⭐⭐⭐⭐⭐</label> 
+          </div>
+          <div class="col-12">
+            <label class="form-label d-flex justify-content-center">Evidencias Comprobatorias</label> 
+            <ul class="mt-2">
+              <li class="p-2">
+                  <div class="d-flex flex-column">
+                      <p class="text-sm">Constancia de acreditación expedida por el Director del Proyecto y Departamento Académico correspondiente.</p>
+                  </div>
+              </li>  
+             <!-- <li *ngFor="let evdcom of evdCompro" class="p-2 mb-2">
+                <div class="d-flex flex-column">
+                  <p class="text-sm">{{evdcom.evd_pres_des}}</p>
+                </div>
+              </li>  -->
+            </ul>
           </div>
         </div>
       </div>
     </div>
-     </div>
+    </div>
+  </div>
 </div>

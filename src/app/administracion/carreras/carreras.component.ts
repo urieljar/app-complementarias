@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./carreras.component.css']
 })
 export class CarrerasComponent implements OnInit {
+  selectedOption: any;
   carreras: Carreras[] = [];
   carrera = new CarreraClase();
   jdptos: JefeDptos[] = [];
@@ -190,7 +191,7 @@ private validateModel(valorInput: string) {
     });
     Toast.fire({
       icon: 'success',
-      title: 'Signed in successfully'
+      title: 'Guardado correctamente.',
     }).then((result)=>{
       this.obtenerCarreras();
       this.limpiarControls();

@@ -1,27 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
-
 body{
     font-family: 'Open Sans', sans-serif;
-    
 }
-/* .search{
-  
-  top:6px;
-  left:10px;
-} */
-
 .form-control{
-    
     border:none;
     padding-left:32px;
 }
-
 .form-control:focus{
-    
     border:none;
     box-shadow:none;
 }
-
 .green{
     color:green;
 }
@@ -35,7 +23,6 @@ body{
 .example .pagination>li>span {
   border: 1px solid #1b396b;
 }
-
 .pagination>li.active>a {
   background: #1b396b;
   color: #fff;
@@ -47,7 +34,6 @@ body{
   /* border-color: #030dc796; */
 }
 .page-link {
-  
   color: #1b396b;
   background-color: #fff;
 }
@@ -81,7 +67,6 @@ body {
   border: 2px solid #d6d4d4;
 }
 
-
 .search input:focus{
 box-shadow: none;
 border: 2px solid  #1b396b;
@@ -107,4 +92,29 @@ left: 20px;
 .dropdown-item:focus, .dropdown-item:hover {
   color: #fff;
   background-color: #1b396b;
+}
+.text-reset{
+  cursor: pointer;
+  font-weight: bold;
+  opacity: .75;
+}
+
+.modal-header{
+  background-color: #1b396b;
+  color: white;
+}
+.modal-footer{
+  background: #d3d3d363;
+}
+
+.colored-toast.swal2-icon-error {
+  background-color: #f27474 !important;
+}
+.green{
+    color:green;
+    text-shadow: rgb(29, 81, 39) 0.1em 0.1em 0.2em
+}
+.btn-close{
+  background: white url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+  color: white;
 }

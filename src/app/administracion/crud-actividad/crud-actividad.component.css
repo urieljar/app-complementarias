@@ -376,7 +376,14 @@ select {
   background-position-x: 25%;
   border-radius: 0.5rem;
 }
-
+.btn-primary{
+  background-color: #1b396b;
+}
+.btn-primary:hover{
+  color: #1b396b;
+  background-color: #ffffff;
+  border-color: #1b396b;
+}
 .btn.btn-link {
   box-shadow: none;
   font-weight: 700;

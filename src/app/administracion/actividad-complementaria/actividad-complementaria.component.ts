@@ -61,9 +61,13 @@ export class ActividadComplementariaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         Swal.fire(
-          'Eliminado!',
-          'Su archivo ha sido eliminado.',
-          'success',
+          {
+            title: 'Eliminado!',
+            icon: 'success',
+            text: 'Su archivo ha sido eliminado.',
+            showConfirmButton: false,
+            timer: 1000
+          }
         ).then((result) => {
           console.log(actCom);
           this.actComplementariaService.deleteActComplementaria(actCom.id).subscribe(
@@ -78,9 +82,13 @@ export class ActividadComplementariaComponent implements OnInit {
         })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
-          'Cancelado',
-          'Su archivo ha sido cancelado. :)',
-          'error'
+          {
+            title: 'Cancelado',
+            icon: 'error',
+            text: 'Su archivo ha sido cancelado. :)',
+            showConfirmButton: false,
+            timer: 1000
+          }
         )
       }
     })
@@ -88,7 +96,7 @@ export class ActividadComplementariaComponent implements OnInit {
   obtenerTiposActividades() {
     this.tipoActService.getTipoActividades().subscribe((res: any) => {
       this.TiposActs = res.data;
-      console.log(this.TiposActs);
+      //console.log(this.TiposActs);
       // console.log(res);
 
     }, ((error: any) => {
