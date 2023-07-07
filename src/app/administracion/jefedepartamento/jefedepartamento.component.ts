@@ -30,7 +30,10 @@ export class JefedepartamentoComponent implements OnInit {
   ///variables para ver el pasword///
   visible: boolean = true;
   changetype: boolean = true;
-  constructor(private jefedptoService: JefeDptoService, private dptoService: DepartamentosService, private router: Router) { }
+  constructor(
+    private jefedptoService: JefeDptoService, 
+    private dptoService: DepartamentosService, 
+    private router: Router) { }
  // inicio del componente
   ngOnInit(): void {
     this.formularioReactivo();
@@ -165,6 +168,9 @@ export class JefedepartamentoComponent implements OnInit {
     this.formulario.controls['nombre'].setValue('');
     this.formulario.controls['apellidos'].setValue('');
     this.formulario.controls['departamento'].setValue('');
+    this.formulario.controls['clave'].setValue('');
+    this.formulario.controls['fecha_ingreso'].setValue('');
+    this.formulario.controls['fecha_termina'].setValue('');
   }
   // envio de datos al backend//
   agregarJefeDpto(){
@@ -178,8 +184,6 @@ export class JefedepartamentoComponent implements OnInit {
     this.jdpto.fecha_ingreso = this.formulario.value.fecha_ingreso;
     this.jdpto.fecha_termina = this.formulario.value.fecha_termina;
     this.jdpto.departamento = this.formulario.value.departamento;
-   // console.log(this.jdpto.rfc);
-    //console.log(this.jdpto);
     this.jefedptoService.postJefeDpto(this.jdpto).subscribe((res: any) => {
       //console.log(res);
       this.openToast();
@@ -209,6 +213,46 @@ export class JefedepartamentoComponent implements OnInit {
       }
     );
   }
+  cambiarclave(jdepto: any) {
+    this.jefedptoService.getJefeDpto(jdepto.rfc).subscribe(
+      (res: any) => {
+        // this.periodo = res['data'];
+        this.jdpto = res.data;
+        console.log(this.jdpto);
+      }
+    );
+ 
+    Swal.fire({
+      //title: 'Input something',
+      inputLabel: 'Cambiar contraseña',
+      //inputPlaceholder: 'Agrega una nota final...',
+      input: 'password',
+      //inputValue: solicitudes.observacion,
+      inputAttributes: {
+        //'aria-label': 'Type your message here',
+        placeholder: "Type your password",
+        // type: "password",
+      },
+      showCancelButton: true
+    }).then((result) => {
+      if (result.value) {
+        this.jdpto.clave = result.value;
+        console.log(this.jdpto);
+        this.jefedptoService.putJefeDpto(this.jdpto).subscribe(
+          res => {
+            //console.log(res);
+            this.openToast();
+          },
+          err => {
+            console.log('no se pudo actualizar');
+          }
+        );
+        //console.log(result.value);
+
+      }
+    })
+  }
+
 // elimnar datos en el backend  
   eliminarJefeDpto(jefe:any){
     Swal.fire({

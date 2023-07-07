@@ -64,6 +64,11 @@
                                                     <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                                                 </svg>
                                             </button>
+                                
+                                            <button class="btn btn-outline-secondary" (click)=" cambiarclave(jefes)">
+                                            <i class="fa fa-list-alt" aria-hidden="true"></i>
+                                            </button>
+                                        
                                         </td>
                                       </tr>
                                     </tbody>
@@ -254,7 +259,7 @@
                 <div class="col-sm-4">
                     <div class="mb-4">
                         <label for="fecha_termina" class="form-label" ><h6>Fecha que Termina</h6></label>
-                        <input type="text" id="fecha_termina" formControlName="fecha_termina" [min]="deshabilitar" value="{{this.jdpto.fecha_termina|date: 'd/M/yyyy'}}" [ngClass]="{ 'is-invalid': submitted && f.fecha_termina.errors}" class="form-control" autocomplete="off" readonly>
+                        <input type="date" id="fecha_termina" formControlName="fecha_termina" [min]="deshabilitar" value="{{this.jdpto.fecha_termina|date: 'd/M/yyyy'}}" [ngClass]="{ 'is-invalid': submitted && f.fecha_termina.errors}" class="form-control" autocomplete="off" readonly>
                     </div>
                     <!-- <div *ngIf="submitted && f.fecha_termina.errors" class="invalid-feedback">
                       <div *ngIf="f.fecha_termina.errors.required">Por favor, seleccionar la Fecha de Egreso</div>

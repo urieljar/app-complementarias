@@ -6,38 +6,37 @@
   <div class="col-sm-6 offset-3">
     <div class="card">
       <div class="card-header">
-        Ingresa los nuevos datos
+        Actualizar datos del alumno: {{no_control}}
       </div>
       <div class="card-body">
-        <form action="" method="POST">
-          <input type="hidden" name="id" value="">
+        <form [formGroup]="formulario" novalidate>
+          <!-- <input type="hidden" name="id" value=""> -->
           <div class="mb-3">
             <label for="nombre" class="form-label"><h6>Nombre</h6></label>
               <input type="text" id="nombre" formControlName="nombre" class="form-control mayuscula" readonly>
           </div>
           <div class="mb-3">
             <label for="a_paterno" class="form-label" ><h6>Apellido Paterno</h6></label>
-            <input type="text" id="a_paterno" formControlName="a_paterno" class="form-control mayuscula" autocomplete="off" required>
+            <input type="text" id="a_paterno" formControlName="a_paterno" class="form-control mayuscula" autocomplete="off" readonly>
           </div>
           <div class="mb-3">
             <label for="a_materno" class="form-label" ><h6>Apellido Materno</h6></label>
-            <input type="text" id="a_materno" formControlName="a_materno" class="form-control mayuscula" autocomplete="off" required>
+            <input type="text" id="a_materno" formControlName="a_materno" class="form-control mayuscula" autocomplete="off" readonly>
           </div>
           <div class="mb-3">
             <label for="correo" class="form-label">Correo</label>
-            <input type="email" name="correo" id="correo" class="form-control" value="" >
+            <input type="email" name="email" id="email" formControlName="email" autocomplete="off" class="form-control" >
           </div>
           <div class="mb-3">
             <label for="nombre" class="form-label">Telefono</label>
-            <input type="text" name="nombre" id="nombre" class="form-control" value="" >
+            <input type="text" name="telefono" id="telefono" formControlName="telefono" autocomplete="off" class="form-control" >
           </div>
           <div class="col text-center">
-            <button type="submit" name="editar" class="btn btn-success justify-content-center">
+            <button type="submit" name="editar" (click)="editarAlumno()" class="btn btn-primary justify-content-center">
             <i class="bi bi-person-bounding-box"></i>&nbsp;&nbsp;
             Actualizar mi informacion
           </button>
           </div>
-          
         </form>
       </div>
     </div>

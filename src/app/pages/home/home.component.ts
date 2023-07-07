@@ -38,9 +38,9 @@ export class HomeComponent {
             Swal.fire({
               title: 'Entrando al sistema!!!',
               html:
-                'Espere 5 segundos!' +
+                'Espere 3 segundos!' +
                 '</button>',
-              timer: 5000,
+              timer: 3000,
               didOpen: () => {
                 Swal.showLoading()
               },

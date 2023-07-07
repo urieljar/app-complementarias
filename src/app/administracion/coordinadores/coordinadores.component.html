@@ -1,48 +1,19 @@
 <div class="container">
-  <!-- <div class="p-5 text-center">
-    <h4>Registros de Alumnos</h4>
-    <P>Listas de alumnos disponibles para la institución</P>
-  </div> -->
+  <div class="p-5 text-center">
+    <h4>Coordinadores</h4>
+    <P>Listas de coordinadores registrados</P>
+  </div>
   <div class="row">
     <div class="col-md-12">
-        <div class="row py-5">
-        <div class="col-lg-12 mx-auto">
-          <div class="text-white p-5 shadow-sm rounded banner">
-            <h1 class="display-4">Actividades Académicas</h1>
-            <p class="lead">Registrar Coordinador.</p>
-            <p class="lead">Listado de coordinadores registrados, crear un <a data-bs-toggle="modal" data-bs-target="#Registro" class="text-reset">nuevo</a> registro. </p> 
-          </div>
-        </div>
-      </div>
       <div class="mb-2 d-flex justify-content-between align-items-center">
         <div class="container-fluid">
           <div class="col-md-5">
             <div class="input-group">
-              <input class="form-control border-end-0 border rounded-pill" type="search" placeholder="Buscar por nombre" (keyup)=" buscarcoordinador(txtBuscar.value)" #txtBuscar>
-              <span class="input-group-append">
-                  <button class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5">
-                      <i class="fa fa-search"></i>
-                  </button>
-              </span>
+              <input class="form-control border-end-0 border rounded-pill" type="text" placeholder="Buscar por nombre" (keyup)=" buscarcoordinador(txtBuscar.value)" #txtBuscar>
             </div>
             <br>
         </div>
         </div>
-        <!--<div class="px-8">
-   
-            <div class="dropdown">
-                    <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        Filtros
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdown">
-                        <li><a class="dropdown-item" href="#">ELECTRONICA</a></li>
-                        <li><a class="dropdown-item" href="#">GESTION EMPRESARIAL</a></li>
-                        <li><a class="dropdown-item" href="#">TIC'S</a></li>
-                        <li><a class="dropdown-item" href="#">QUIMICA</a></li>
-                        <li><a class="dropdown-item" href="#">ACUICULTURA</a></li>
-                    </ul>
-                </div>
-        </div>-->
       </div>
       <div class="table-wrap">
         <table class="table">
@@ -72,12 +43,6 @@
                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                   </svg>
                 </button>
-                <span>&nbsp;</span>
-                <button class="btn btn-outline-danger" (click)=" EliminarConfirmation(coordinador)">
-                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                  </svg>
-                 </button>
               </td>
             </tr>
 
@@ -105,74 +70,6 @@
     </div>
   </div>
 </div>
-
-<!-- Modal #Crear Nuevo Registro -->
-<div class="modal fade" id="Registro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Crear un registro</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="limpiarControls()" aria-label="Close"></button>
-      </div>
-        <div class="modal-body">
-          <form [formGroup]="formulario" novalidate>
-          <div class="p-4">
-              <div class="row">
-                <div class="col-sm-4">
-                    <div class="mb-4">
-                        <label for="rfc" class="form-label"><h6>RFC</h6></label>
-                        <input type="text" id="nombre" (ngModelChange)="valorInput($event)" formControlName="rfc" name="rfc" autocomplete="off" class="form-control" required>
-                    </div>
-                  </div>
-                  <div class="col-sm-5">
-                    <div class="mb-4">
-                        <label for="clave" class="form-label"><h6>Clave</h6></label>
-                        <div class="input-group mb-3">
-                            <input [type]="changetype?'password':'text'" id="clave" formControlName="clave" class="form-control" autocomplete="off" required>
-                            <button class="btn btn-outline-secondary" type="button" id="viewPassword" (click)="verPassword()"><i [ngClass]="visible?'bi bi-eye-slash-fill':'bi bi-eye-fill'"></i></button>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="mb-3">
-                      <label for="av" class="form-label"><h6>Abreviatura</h6></label>
-                      <input type="text" id="av" class="form-control" formControlName="av" name="av" required>
-                    </div>
-                  </div>
-                </div> 
-                <div class="row">
-                  <div class="col-sm-4">
-                    <div class="mb-4">
-                      <label for="nombre" class="form-label"><h6>Nombre</h6></label>
-                      <input type="text" id="nombre" formControlName="nombre" name="nombre" autocomplete="off" class="form-control" required>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="mb-4">
-                      <label for="apellidos" class="form-label"><h6>Apellidos</h6></label>
-                      <input type="text" id="apellidos" formControlName="apellidos" name="apellidos" autocomplete="off" class="form-control" required>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                      <label for="status" class="form-label"><h6>Estado</h6></label>
-                      <select class="form-select mb-3" formControlName="status" name="status" aria-label="Estado" >
-                          <option disabled value="" >Seleccione el Estado...</option>
-                          <option class="form-control mayuscula text-danger"  value='0'>Inactivo</option>
-                          <option class="form-control mayuscula text-success" value='1'>Activo</option>
-                      </select>
-                  </div>
-                </div>
-          </div>
-          <div class="modal-footer">
-          <button type="button" class="btn btn-secondary"(click)="limpiarControls()" data-bs-dismiss="modal">Cancelar</button>
-          <button  class="btn btn-primary" data-bs-dismiss="modal" (click)="crearCoordinador()">Guardar</button>
-        </div>
-      </form>
-      </div>  
-    </div>
-  </div>
-</div> 
-
 <!-- Modal #Editar Registro -->
 <div class="modal fade" id="Editar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
@@ -195,7 +92,7 @@
                     <div class="mb-4">
                         <label for="clave" class="form-label"><h6>Clave</h6></label>
                         <div class="input-group mb-3">
-                            <input [type]="changetype?'password':'text'" id="clave" formControlName="clave" class="form-control" autocomplete="off" readonly>
+                            <input [type]="changetype?'password':'text'" id="clave" formControlName="clave" class="form-control" autocomplete="off">
                             <button class="btn btn-outline-secondary" type="button" id="viewPassword" (click)="verPassword()"><i [ngClass]="visible?'bi bi-eye-slash-fill':'bi bi-eye-fill'"></i></button>
                         </div>
                     </div>
@@ -203,7 +100,7 @@
                   <div class="col-sm-3">
                     <div class="mb-3">
                       <label for="av" class="form-label"><h6>Abreviatura</h6></label>
-                      <input type="text" id="av" class="form-control" formControlName="av" name="av" required>
+                      <input type="text" id="av" class="form-control" autocomplete="off" formControlName="av" name="av" required>
                     </div>
                   </div>
                 </div> 

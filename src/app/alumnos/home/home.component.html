@@ -1,43 +1,14 @@
-<!-- 
-<div class="container py-5 mt-md-1">
-  <div class="container-fluid">
-    <div  class="row">
-      <div class="col-md-auto my-3">
-        <div *ngIf="bandera == true">
-          <div *ngFor="let solicitud of solicitudes; index as i;" class="card" style="width: 18rem">
-            <div class="card-header">
-                {{solicitud.tipo}}   
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">{{solicitud.act_complementaria}}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">{{solicitud.credito}} Crédito</h6>
-              <p class="card-text">
-                ¡Felicidades has concluido tu participacion en esta actividad complementaria!.
-              </p>
-            </div>
-            <div class="card-footer bg-transparent border-success">
-              <small *ngFor="let item of numSequence(solicitud.credito);">⭐</small>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="!bandera">
-        <h4>No hay ningun registro de actividades complementarias, Por favor registrate a una actividad complementaria!, para seguir acumulando creditos.</h4>
-      </div>
-    </div>
-  </div>
-</div>
- -->
+
 <div class="container">
-  <div class="row">
+  <div *ngIf="!bandera"  class="row">
     <div *ngFor="let solicitud of solicitudes; index as i;" class="col-md-auto">
       <div  class="card h-100" style="width: 18rem">
             <div class="card-header">
-                {{solicitud.tipo}}   
+                {{solicitud.tipo_act}}   
             </div>
             <br>
             <div class="card-body">
-              <h5 class="card-title">{{solicitud.act_complementaria}}</h5>
+              <h5 class="card-title">{{solicitud.act_especifica}}</h5>
               <h6 class="card-subtitle mb-2 text-muted">{{solicitud.credito}} Crédito</h6>
               <p class="card-text">
                 ¡Felicidades has concluido tu participacion en esta actividad complementaria!
@@ -47,12 +18,11 @@
               <small *ngFor="let item of numSequence(solicitud.credito);">⭐</small>
             </div>
       </div>
-      </div>
-      <div *ngIf="!bandera">
+    </div>
+  </div>
+  <div *ngIf="bandera" class="row">
         <div class="col-md-auto my-3" >
           <h4>No hay ningun registro de actividades complementarias, Por favor registrate a una actividad complementaria!, para seguir acumulando creditos.</h4>
         </div>
-      </div>
-      
-  </div>
+    </div>
 </div>

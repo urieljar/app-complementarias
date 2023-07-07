@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { SolicitudAlumno } from 'src/app/models/solicitud.model';
+import { Solicitud, SolicitudAlumno } from 'src/app/models/solicitud.model';
 import { SolicitudService } from 'src/app/services/solicitud.service';
 
 @Component({
@@ -9,27 +9,23 @@ import { SolicitudService } from 'src/app/services/solicitud.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  bandera: boolean = false;
+  bandera: any;
   no_control: any;
-  
-  solicitudes: SolicitudAlumno[] = [];
+  solicitudes: Solicitud[] = [];
   constructor(private router: Router,
     private solicitudService: SolicitudService) { }
   ngOnInit(): void {
-    // this.formularioReactivo();
     this.no_control = localStorage.getItem('no_control');
-    this.obtenerSolicitudes();
-
+    this.obtenerSolicitudes(this.no_control);
   }
-  obtenerSolicitudes() {
-    console.log(this.no_control);
-    this.solicitudService.getSolicitudAlumno(this.no_control).subscribe((res: any) => {
+  obtenerSolicitudes(no_control:any) {
+    this.solicitudService.getSolicitudAlumno(no_control).subscribe((res: any) => {
       this.solicitudes = res.data;
-      this.bandera = true;
-      //this.solicitudes = res.data.credito
-      console.log(this.solicitudes);
-    }, ((error: any) => {
       this.bandera = false;
+      //this.solicitudes = res.data.credito
+      //console.log(this.solicitudes);
+    }, ((error: any) => {
+      this.bandera = true;
       console.log(error);
     }));
   }

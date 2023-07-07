@@ -90,14 +90,12 @@
                                 <li class="page-item ">
                                   <button class="page-link" [disabled]="!anterior" (click)="cambiarPagina(-1)" tabindex="-1">
                                     <i class="bi bi-arrow-left"></i>
-                                    <!-- <span class="sr-only"></span> -->
                                   </button>
                                 </li>
                                   <li *ngFor="let num of numSequence(totalPaginas); index as i " [class.active]="paginaActual-1 === i"  class="page-item">
                                     <a class="page-link" *ngIf="isAll" (click)="cargarAlumnos(i+1)">{{i+1}}</a>
                                     <a class="page-link" *ngIf="!isAll" (click)="buscarCarrera(carreraActual,i+1)">{{i+1}}</a>
                                   </li>
-
                                 <li class="page-item">
                                   <button class="page-link" [disabled]="siguiente" (click)="cambiarPagina(+1)">
                                     <i class="bi bi-arrow-right"></i>

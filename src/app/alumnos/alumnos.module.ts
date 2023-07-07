@@ -7,6 +7,7 @@ import { AlumnosComponent } from './alumnos.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { RegistrarseComponent } from './registrarse/registrarse.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import { RegistrarseComponent } from './registrarse/registrarse.component';
   ],
   imports: [
     CommonModule,
-    AlumnosRoutingModule
+    AlumnosRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class AlumnosModule { }

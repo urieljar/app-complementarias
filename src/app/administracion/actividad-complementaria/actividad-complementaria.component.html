@@ -66,7 +66,24 @@
                               </div>
                         </div>
                         <div class="card-footer py-4">
-                    
+                      <nav >
+                              <ul class="pagination justify-content-end mb-0">
+                                <li class="page-item ">
+                                  <button class="page-link" [disabled]="!anterior" (click)="cambiarPagina(-1)" tabindex="-1">
+                                    <i class="bi bi-arrow-left"></i>
+                                  </button>
+                                </li>
+                                  <li *ngFor="let num of numSequence(totalPaginas); index as i " [class.active]="paginaActual-1 === i"  class="page-item">
+                                    <a class="page-link"(click)="obtenerActComplementarias2(i+1)">{{i+1}}</a>
+                                    <!-- <a class="page-link" *ngIf="!isAll" (click)="buscarCarrera(carreraActual,i+1)">{{i+1}}</a> -->
+                                  </li>
+                                <li class="page-item">
+                                  <button class="page-link" [disabled]="siguiente" (click)="cambiarPagina(+1)">
+                                    <i class="bi bi-arrow-right"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>

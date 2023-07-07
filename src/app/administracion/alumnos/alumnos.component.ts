@@ -286,7 +286,6 @@ export class AlumnosComponent implements OnInit {
       }
     })
   }
-
   //otros metodos
   limpiarControls(): void {
     this.formulario.controls['no_control'].setValue('');
@@ -296,7 +295,6 @@ export class AlumnosComponent implements OnInit {
     this.formulario.controls['a_materno'].setValue('');
     this.formulario.controls['carrera'].setValue('');
   }
-
   // mensajes y alertas como eventos de respuesta sobre los subscribe
   mensajeError(mensaje: string) {
     Swal.fire({

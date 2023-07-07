@@ -15,7 +15,7 @@
             <label  class="form-label">Coordinador: {{actcoordinada.coordinador}}</label> 
           </div>
           <div class="col-12 col-lg-4">
-            <label  class="form-label">Numero de participantes: {{actcoordinada.num_participantes}}</label> 
+            <label  class="form-label" >Numero de participantes: {{actcoordinada.num_participantes}}</label> 
           </div>
           
           <div class="col-6 col-lg-3">
@@ -29,18 +29,18 @@
             <label *ngIf="actcoordinada.credito == '5'" class="form-label">Credito: ⭐⭐⭐⭐⭐</label> 
           </div>
           <div class="col-12">
-            <label class="form-label d-flex justify-content-center">Evidencias Comprobatorias</label> 
+            <label class="btn text-center" (click)="obtenerEvdComprobatorias(actcoordinada.id_actcomplementaria)">Evidencias Comprobatorias</label> 
             <ul class="mt-2">
-              <li class="p-2">
+              <!-- <li class="p-2">
                   <div class="d-flex flex-column">
                       <p class="text-sm">Constancia de acreditación expedida por el Director del Proyecto y Departamento Académico correspondiente.</p>
                   </div>
-              </li>  
-             <!-- <li *ngFor="let evdcom of evdCompro" class="p-2 mb-2">
+              </li>   -->
+             <li *ngFor="let evdcom of evdCompro" class="p-2 mb-2">
                 <div class="d-flex flex-column">
                   <p class="text-sm">{{evdcom.evd_pres_des}}</p>
                 </div>
-              </li>  -->
+              </li> 
             </ul>
           </div>
         </div>

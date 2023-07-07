@@ -19,23 +19,83 @@ export class ActividadComplementariaComponent implements OnInit {
   TiposActs: TiposAct[] = [];
 
   actComplementaria = new ActvidadComplementariaClase2();
+  public totalAlumnos: number = 0;
+  public paginaActual: number = 1;
+  public totalPaginas: number = 0;
+  public siguiente: boolean = false;
+  public anterior: boolean = false;
+  public page: number = 1;
+  public isAll: boolean = false;
   constructor(private router: Router,
     private tipoActService: TipoActividadService,
     private actComplementariaService: ActividadComplementariaService,
   ) { }
   ngOnInit(): void {
-    this.obtenerActComplementarias();
+    //this.obtenerActComplementarias();
+    this.obtenerActComplementarias2(this.paginaActual);
     this.obtenerTiposActividades();
   }
   obtenerActComplementarias(){
     this.actComplementariaService.getActComplementarias().subscribe((res: any) => {
       this.complementarias = res.data;
-      console.log(this.complementarias);
+     // console.log(this.complementarias);
       // console.log(res);
 
     }, ((error: any) => {
       console.log(error);
     }));
+  }
+  obtenerActComplementarias2(index: number) {
+    this.actComplementariaService.getActComplementariasPaginado(index).subscribe((res: any) => {
+      this.complementarias = res.data.actividad;
+     // this.alumnosTemp = this.alumnos;
+      this.totalAlumnos = res.data.total;
+      this.totalPaginas = res.data.paginas;
+      this.paginaActual = index;
+      //console.log(this.complementarias);
+      // console.log(res);
+      if (index == this.totalPaginas && index == 1) {
+        this.anterior = false;
+        this.siguiente = true;
+        return
+      }
+      if (index == 1) {
+        this.anterior = false;
+        this.siguiente = false;
+      }
+      if (index == this.totalPaginas) {
+        this.anterior = true;
+        this.siguiente = true;
+      }
+      if (index > 1 && index < this.totalPaginas) {
+        this.anterior = true;
+        this.siguiente = false;
+      }
+    }, ((error: any) => {
+      console.log(error);
+    }));
+  }
+  cambiarPagina(valor: number) {
+    this.paginaActual += valor;
+    if (this.paginaActual == 1) {
+      this.anterior = false;
+      this.siguiente = false;
+    }
+    if (this.paginaActual == this.totalPaginas) {
+      this.anterior = true;
+      this.siguiente = true;
+    }
+    if (this.paginaActual > 1 && this.page < this.totalPaginas) {
+      this.anterior = true;
+      this.siguiente = false;
+    }
+    this.obtenerActComplementarias2(this.paginaActual);
+   
+
+  }
+  numSequence(n: number): Array<number> {
+    let m = n;
+    return Array(m);
   }
   obtenerActComplementaria(act: any) {
     this.actComplementariaService.getActComplementaria2(act.id).subscribe((res: any) => {

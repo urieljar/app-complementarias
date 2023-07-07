@@ -22,3 +22,18 @@ export class ActividadCoordinadas {
         public coordinador: string
     ) { }
 }
+export class ActividadCoordinadaJdepto {
+    constructor(
+        public id_actcoordinada: string,
+        public id_actcomplementaria: string,
+        public act_gnral: string,
+        public act_especifica: string,
+        public lugar: string,
+        public num_participantes: string,
+        public tiempo: string,
+        public credito: string,
+        public status: number,
+        public tipo: string,
+        public coordinador: string
+    ) { }
+}

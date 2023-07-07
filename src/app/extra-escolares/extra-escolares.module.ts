@@ -6,9 +6,11 @@ import { ExtraEscolaresComponent } from './extra-escolares.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegistroComponent } from './registro/registro.component';
-import { EvaluacionComponent } from './evaluacion/evaluacion.component';
+
 import { ConstanciaComponent } from './constancia/constancia.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CoordinarComponent } from './coordinar/coordinar.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 @NgModule({
@@ -17,8 +19,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     NavbarComponent,
     RegistroComponent,
-    EvaluacionComponent,
-    ConstanciaComponent
+    CoordinarComponent,
+    ConstanciaComponent,
+    PerfilComponent
   ],
   imports: [
     CommonModule,

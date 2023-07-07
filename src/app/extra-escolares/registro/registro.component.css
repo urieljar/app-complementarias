@@ -103,9 +103,19 @@ td {
   border-color: #1b396b;
   color: #fff;
 }
+.btn-primary:hover{
+  color: #ffffff;
+  background-color: #ffffff;
+  border-color: #1b396b;
+}
 .btn.btn-primary:hover, .btn.btn-primary:focus {
   border-color: #1b396b !important;
   background: #1b396b !important;
+}
+.btn-outline-secondary:hover {
+  color: #ffffff;
+  background-color: #1b396b;
+  border-color: #1b396b;
 }
 /* .container {
   width: 100%;
@@ -138,6 +148,21 @@ td {
   background-color: #fff;
 }
 
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #1b396b;
+  border-color: #1b396b;
+}
+button:disabled,
+button[disabled]{
+  cursor: not-allowed;
+  pointer-events: none;
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
 body {
   background: #f4f4f4;
 }
@@ -150,11 +175,7 @@ body {
 .ms-n5 {
     margin-left: -40px;
 }
-.btn-outline-secondary:hover {
-  color: #1b396b;
-  background-color: #1b396b;
-  border-color: #1b396b;
-}
+
 .btn-outline-success {
   color: #1b396b;
   border-color: #1b396b;
@@ -197,8 +218,6 @@ left: 20px;
   color: #fff;
   background-color: #1b396b;
 }
-
-
 .modal-header{
   background-color: #1b396b;
   color: white;
@@ -219,4 +238,8 @@ left: 20px;
 
 .colored-toast.swal2-icon-error {
   background-color: #f27474 !important;
+}
+.green{
+    color:green;
+    text-shadow: rgb(29, 81, 39) 0.1em 0.1em 0.2em
 }

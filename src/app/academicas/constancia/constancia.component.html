@@ -24,21 +24,19 @@
             </div>
         </div>
         <div class="px-8">
-            <!-- Example split danger button -->
             <div class="dropdown">
-                    <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        Filtros
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdown">
-                        <li><a class="dropdown-item" href="#">ELECTRONICA</a></li>
-                        <li><a class="dropdown-item" href="#">GESTION EMPRESARIAL</a></li>
-                        <li><a class="dropdown-item" href="#">TIC'S</a></li>
-                        <li><a class="dropdown-item" href="#">QUIMICA</a></li>
-                        <li><a class="dropdown-item" href="#">ACUICULTURA</a></li>
-                    </ul>
-                </div>
-        </div>
-        
+                <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filtros
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdown">
+                    <li><a class="dropdown-item" href="#">ELECTRONICA</a></li>
+                    <li><a class="dropdown-item" href="#">GESTION EMPRESARIAL</a></li>
+                    <li><a class="dropdown-item" href="#">TIC'S</a></li>
+                    <li><a class="dropdown-item" href="#">QUIMICA</a></li>
+                    <li><a class="dropdown-item" href="#">ACUICULTURA</a></li>
+                </ul>
+            </div>
+        </div> 
     </div>
     <br>
     <div class="table-responsive">
@@ -59,24 +57,18 @@
                 <!-- <th scope="row"><input class="form-check-input" type="checkbox"></th> -->
                <td>{{solicitud.no_control}}</td>
                 <td>{{solicitud.alumno}}</td>
-                <td *ngIf="solicitud.valor_numerico >= 1"><i class="fa fa-check-circle-o green"></i><span class="ms-1 green">Acreditado</span></td>
-                <td *ngIf="solicitud.valor_numerico == 0"><i class="fa fa-times-circle-o text-danger"></i><span class="ms-1 text-danger">No Acreditado</span></td>
-                <td>{{solicitud.act_complementaria}}</td>
-                <td *ngIf="solicitud.status == 1">
+                <td *ngIf="solicitud.status == 1"><i class="fa fa-check-circle-o green"></i><span class="ms-1 green">Acreditado</span></td>
+                <td *ngIf="solicitud.status == 0"><i class="fa fa-times-circle-o text-danger"></i><span class="ms-1 text-danger">No Acreditado</span></td>
+                <td>{{solicitud.act_especifica}}</td>
+                <td *ngIf="solicitud.valor_numerico >= 1">
                     <button class="btn btn-outline-success">
                         <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     </button>
                 </td>
-                <td *ngIf="solicitud.status == 0">
-                    <!-- <button class="btn btn-outline-success">
-                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                    </button> -->
+                <td *ngIf="solicitud.valor_numerico == 0">
+                    <i aria-hidden="true">No file</i>
                 </td>
-                <!-- <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">Paid</span></td> -->
-                <!-- <td><img src="https://i.imgur.com/VKOeFyS.png" width="25"> Althan Travis</td> -->
-                <!-- <td class="text-end"><span class="fw-bolder">$0.99</span> <i class="fa fa-ellipsis-h  ms-2"></i></td> -->
                 </tr>
-
             </tbody>
         </table>
         <div class="example">
@@ -94,6 +86,5 @@
             </ul>
             </nav>
         </div>
-        
     </div>
 </div>

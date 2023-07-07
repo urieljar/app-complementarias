@@ -11,6 +11,7 @@ import { RegistroComponent } from './registro/registro.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoordinarComponent } from './coordinar/coordinar.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 
@@ -21,7 +22,8 @@ import { CoordinarComponent } from './coordinar/coordinar.component';
     CoordinarComponent,
     AcademicasComponent,
     RegistroComponent,
-    NavbarComponent
+    NavbarComponent,
+    PerfilComponent
   ],
   imports: [
     CommonModule,

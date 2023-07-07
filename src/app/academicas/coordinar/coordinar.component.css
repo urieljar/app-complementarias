@@ -37,6 +37,21 @@ body{
   color: #1b396b;
   background-color: #fff;
 }
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #1b396b;
+  border-color: #1b396b;
+}
+button:disabled,
+button[disabled]{
+  cursor: not-allowed;
+  pointer-events: none;
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
 .btn-outline-success {
   color: #1b396b;
   border-color: #1b396b;

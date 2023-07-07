@@ -13,16 +13,18 @@ import { SolicitudService } from 'src/app/services/solicitud.service';
 export class ConstanciaComponent implements OnInit {
   complementarias: Complementarias[] = [];
   solicitudes: Solicitud[] = [];
+  jdepto:any;
   Solicitud = new SolicitudClase();
   constructor(
     private router: Router,
     private solicitudService: SolicitudService) { }
   ngOnInit(): void {
+    this.jdepto = localStorage.getItem('rfc');
     this.obtenerSolicitudes();
   }
 
   obtenerSolicitudes() {
-    this.solicitudService.getSolicitudes().subscribe((res: any) => {
+    this.solicitudService.getSolicitudJdepto(this.jdepto).subscribe((res: any) => {
       this.solicitudes = res.data;
       console.log(this.solicitudes);
     }, ((error: any) => {

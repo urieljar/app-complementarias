@@ -12,6 +12,8 @@ import { ActividadComplementariaComponent } from './actividad-complementaria/act
 import { CrudActividadComponent } from './crud-actividad/crud-actividad.component';
 import { EditarActividadComponent } from './editar-actividad/editar-actividad.component';
 
+import { CoordinadoresComponent } from './coordinadores/coordinadores.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -27,6 +29,7 @@ const routes: Routes = [
       { path: 'complementaria', component: ActividadComplementariaComponent },
       { path: 'crud-actividad', component: CrudActividadComponent },
       { path: 'editar-actividad/:id', component: EditarActividadComponent },
+      { path: 'coordinadores', component: CoordinadoresComponent },
       { path: '**', redirectTo: 'home' }
     ]
   }

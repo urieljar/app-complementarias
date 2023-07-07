@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActCoordinadaInterface } from '../interfaces/act-coordinada.interface';
 
-const base_url = 'http://apicomplementarias.test';
+const base_url = 'https://apicomplementarias.salinacruz.tecnm.mx/public';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,11 +17,20 @@ export class ActividadCoordinadaService {
   getActividadesCoordinadas2(id: string) {
     return this.http.get<any[]>(`${base_url}/actividadcoordinada/${id}`);
   }
+  buscarActividadCoordinada(rfc: string, busqueda: string) {
+    return this.http.get<any[]>(`${base_url}/buscaractcoordinada/${rfc}/${busqueda}`);
+  }
+  getActividadesJfedpto(rfc: string, page: number = 0) {
+    return this.http.get<any[]>(`${base_url}/actcoordinadajdepto/${rfc}?page=${page}`);
+  }
   getActividadesCoordinador(rfc: string) {
     return this.http.get<any[]>(`${base_url}/actividadcoordinador/${rfc}`);
   }
   getActividadCoordinada(id: string) {
     return this.http.get<any[]>(`${base_url}/actcordinada/${id}`);
+  }
+  getTipoActividadCoordinada(id: string) {
+    return this.http.get<any[]>(`${base_url}/tipoactividadcoordinada/${id}`);
   }
   postActividadCoordinada(actCoordinada: ActCoordinadaInterface): Observable<ActCoordinadaInterface> {
     console.log('posteando actividades coordinadas');

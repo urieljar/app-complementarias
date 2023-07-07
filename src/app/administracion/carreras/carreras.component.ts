@@ -108,8 +108,7 @@ private validateModel(valorInput: string) {
     }
     else{
       this.isValidSubmit = false;
-    }
-    
+    } 
   }
   nombreCorto(valorInput: string){
     //console.log(valorInput);
@@ -213,11 +212,12 @@ private validateModel(valorInput: string) {
   limpiarControls(): void {
     this.carrera.nombre = '';
     this.carrera.nombre_corto = '';
-    
+    this.carrera.jdepto = '';
+    //this.isValidSubmit = false;
     this.isbanderaC1 = false;
     this.isbanderaC2 = false;
     this.isbanderaC3 = false;
-    this.validacion();
-    //this.formulario.reset();
+    //this.validacion();
+   // this.formulario.reset();
   }
 }

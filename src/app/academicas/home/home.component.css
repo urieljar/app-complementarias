@@ -55,6 +55,15 @@ body {
   background-color: #1b396b;
   border-color: #1b396b;
 }
+button:disabled,
+button[disabled]{
+  cursor: not-allowed;
+  pointer-events: none;
+
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
 .ms-n5 {
     margin-left: -40px;
 }

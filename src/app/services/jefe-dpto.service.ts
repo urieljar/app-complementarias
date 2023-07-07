@@ -2,7 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { JefeDptoInterface } from '../interfaces/jefe-departamento.interface';
-const base_url = 'http://apicomplementarias.test';
+// const base_url = 'http://apicomplementarias.test';
+const base_url = 'https://apicomplementarias.salinacruz.tecnm.mx/public';
+
 @Injectable({
   providedIn: 'root'
 })

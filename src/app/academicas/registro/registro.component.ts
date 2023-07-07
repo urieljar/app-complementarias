@@ -1,13 +1,9 @@
-import { DatePipe } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlumnoClase2 } from 'src/app/interfaces/alumno-form.interface';
-import { SolicitudClase } from 'src/app/interfaces/solicitud.interface';
-
 import { Coordinadores } from 'src/app/models/coordinador.model';
-import { Periodo } from 'src/app/models/periodos.model';
-import { Solicitud } from 'src/app/models/solicitud.model';
+
 import { CoordinadorService } from '../../services/coordinador.service';
 import { CoordinadorClase } from 'src/app/interfaces/coordinador.interface';
 
@@ -21,6 +17,7 @@ import Swal from 'sweetalert2';
 export class RegistroComponent implements OnInit {
   jdepto: any;
   coordinadores: Coordinadores[] = [];
+  coordinadoresTemp: Coordinadores[] = [];
   coordinador = new CoordinadorClase();
   //tipo: string = '';
   ///validacion
@@ -30,13 +27,21 @@ export class RegistroComponent implements OnInit {
   ///variables para ver el pasword///
   visible: boolean = true;
   changetype: boolean = true;
+  //variables paginado paginados
+  public siguiente: boolean = false;
+  public anterior: boolean = false;
+  public totalActividades: number = 0;
+  public paginaActual: number = 1;
+  public totalPaginas: number = 0;
+  public page: number = 1;
+  //public isAll: boolean = false;
   constructor(
     private router: Router,
     private coordinadorService: CoordinadorService) { }
   ngOnInit(): void {
     this.jdepto = localStorage.getItem('rfc');
     this.formularioReactivo();
-    this.obtenerCoordinadores();
+    this.obtenerCoordinadores(this.paginaActual);
   }
   // formulario reractivo
   formularioReactivo(): void {
@@ -101,16 +106,69 @@ export class RegistroComponent implements OnInit {
       this.mensajeError(mensajeError);
     });
   }
-  obtenerCoordinadores() {
-    this.coordinadorService.cordinadoresJdepto(this.jdepto).subscribe((res: any) => {
-      this.coordinadores = res.data;
-      console.log(this.coordinadores);
+  obtenerCoordinadores(index: number) {
+    this.coordinadorService.getCoordinadoresPaginado(this.jdepto, index).subscribe((res: any) => {
+      this.coordinadores = res.data.coordinador;
+      this.coordinadoresTemp = this.coordinadores;
+      this.totalActividades = res.data.total;
+      this.totalPaginas = res.data.paginas;
+      this.paginaActual = index;
+      if (index == this.totalPaginas && index == 1) {
+        this.anterior = false;
+        this.siguiente = true;
+        return
+      }
+      if (index == 1) {
+        this.anterior = false;
+        this.siguiente = false;
+      }
+      if (index == this.totalPaginas) {
+        this.anterior = true;
+        this.siguiente = true;
+      }
+      if (index > 1 && index < this.totalPaginas) {
+        this.anterior = true;
+        this.siguiente = false;
+      }
+      //console.log(this.coordinadores);
     }, ((error: any) => {
       console.log(error);
     }));
   }
   valorInput(valorInput: string) {
     this.isbandera1 = this.validateModel(valorInput);
+  }
+  cambiarPagina(valor: number) {
+    this.paginaActual += valor;
+    if (this.paginaActual == 1) {
+      this.anterior = false;
+      this.siguiente = false;
+    }
+    if (this.paginaActual == this.totalPaginas) {
+      this.anterior = true;
+      this.siguiente = true;
+    }
+    if (this.paginaActual > 1 && this.page < this.totalPaginas) {
+      this.anterior = true;
+      this.siguiente = false;
+    }
+    this.obtenerCoordinadores(this.paginaActual);
+  }
+  numSequence(n: number): Array<number> {
+    let m = n;
+    return Array(m);
+  }
+  buscarcoordinador(termino: string) {
+    // console.log(termino);
+    if (termino.length === 0) {
+      this.coordinadores = this.coordinadoresTemp;
+    } else if (termino.length > 0) {
+      this.coordinadorService.buscarCoordinador(this.jdepto, termino).subscribe((res: any) => {
+        this.coordinadores = res.data;
+      }, ((error: any) => {
+        console.log(error);
+      }));
+    }
   }
   private validateModel(valorInput: string) {
     return !!valorInput && valorInput.length > 6;
@@ -178,7 +236,7 @@ export class RegistroComponent implements OnInit {
       title: 'Signed in successfully'
     }).then((result) => {
       // location.reload(),
-      this.obtenerCoordinadores();
+      this.obtenerCoordinadores(this.paginaActual);
       this.limpiarControls()
     }); 
   }
@@ -196,7 +254,8 @@ export class RegistroComponent implements OnInit {
     })
   }
 
-  EliminarConfirmation(solicitud: any) {
+  EliminarConfirmation(coordinador: any) {
+    //console.log(coordinador);
     Swal.fire({
       position: 'top',
       width: '40%',
@@ -226,14 +285,12 @@ export class RegistroComponent implements OnInit {
           background: '#3fc3ee',
           showConfirmButton: false,
           timer: 1250,
-          timerProgressBar: true,
+          timerProgressBar: true
         }).then((result) => {
           console.log(this.coordinador);
-          this.coordinadorService.deleteCoordinador(solicitud.id).subscribe(
+          this.coordinadorService.deleteCoordinador(coordinador.rfc).subscribe(
             (res: any) => {
-              this.coordinador = res['data'];
-             // console.log(this.coordinador);
-              //this.obtenerSolicitudes();
+              this.obtenerCoordinadores(this.paginaActual);
               // location.reload();
             }
           );
@@ -241,15 +298,15 @@ export class RegistroComponent implements OnInit {
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire({
           toast: true,
-          icon: 'success',
-          title: 'Borrado exitosamente!',
+          icon: 'info',
+          title: 'Cancelado',
           position: 'top-right',
           iconColor: 'white',
           color: 'white',
           background: '#f27474',
           showConfirmButton: false,
           timer: 1250,
-          timerProgressBar: true,
+          timerProgressBar: true
         })
       }
     })

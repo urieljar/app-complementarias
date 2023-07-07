@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActCoordinadaClase, ActCoordinadaClase2 } from 'src/app/interfaces/act-coordinada.interface';
-import { ActividadCoordinadaJdepto } from 'src/app/models/actividad-coordinada.model';
+import { ActividadCoordinada, ActividadCoordinadaJdepto } from 'src/app/models/actividad-coordinada.model';
 import { Complementarias } from 'src/app/models/complementarias.model';
-import { Coordinadores2 } from 'src/app/models/coordinador.model';
+import { Coordinadores, Coordinadores2 } from 'src/app/models/coordinador.model';
 import { EvdComprobatoria } from 'src/app/models/evd-comprobatoria.model';
 import { ActividadComplementariaService } from 'src/app/services/actividad-complementaria.service';
 import { ActividadCoordinadaService } from 'src/app/services/actividad-coordinada.service';
 import { CoordinadorService } from 'src/app/services/coordinador.service';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,10 +17,9 @@ import Swal from 'sweetalert2';
   templateUrl: './coordinar.component.html',
   styleUrls: ['./coordinar.component.css']
 })
-
 export class CoordinarComponent implements OnInit {
   jdepto: any;
-  tipoActividad = "1";
+  tipoActividad= "2";
   actividadesCoordinadas: ActividadCoordinadaJdepto[] = [];
   actividadesCoordinadasTemp: ActividadCoordinadaJdepto[] = [];
   complementarias: Complementarias[] = [];
@@ -40,10 +40,10 @@ export class CoordinarComponent implements OnInit {
     private router: Router,
     private coordinadorService: CoordinadorService,
     private actComplementariaService: ActividadComplementariaService,
-    private actCoordinadaService: ActividadCoordinadaService) { }
+    private actCoordinadaService: ActividadCoordinadaService) { this.jdepto = localStorage.getItem('rfc'); }
   ngOnInit(): void {
-    this.formularioReactivo();
     this.jdepto = localStorage.getItem('rfc');
+    this.formularioReactivo();
     this.obtenerActComplementarias();
     this.obtenerCoordinadores();
     this.obtenerActividadesCoordinadas(this.paginaActual);
@@ -95,6 +95,7 @@ export class CoordinarComponent implements OnInit {
         this.anterior = true;
         this.siguiente = false;
       }
+      //console.log(this.actividadesCoordinadas);
     }, ((error: any) => {
       console.log(error);
     }));
@@ -114,6 +115,11 @@ export class CoordinarComponent implements OnInit {
       this.siguiente = false;
     }
     this.obtenerActividadesCoordinadas(this.paginaActual);
+    // if (this.isAll) {
+    //   this.cargarAlumnos(this.paginaActual);
+    // } else {
+    //   this.buscarCarrera(this.carreraActual, this.paginaActual)
+    // }
 
   }
   numSequence(n: number): Array<number> {
@@ -121,10 +127,11 @@ export class CoordinarComponent implements OnInit {
     return Array(m);
   }
   buscarcoordinador(termino: string) {
+    // console.log(termino);
     if (termino.length === 0) {
       this.actividadesCoordinadas = this.actividadesCoordinadasTemp;
     } else if (termino.length > 0) {
-      this.actCoordinadaService.buscarActividadCoordinada(this.jdepto, termino).subscribe((res: any) => {
+      this.actCoordinadaService.buscarActividadCoordinada(this.jdepto , termino).subscribe((res: any) => {
         //console.log(res.data);
         this.actividadesCoordinadas = res.data;
       }), ((error: any) => {
@@ -152,8 +159,9 @@ export class CoordinarComponent implements OnInit {
   obtenerActividadCoordinada(actCoordinada: any) {
     this.actCoordinadaService.getActividadCoordinada(actCoordinada.id_actcoordinada).subscribe(
       (res: any) => {
+        // this.periodo = res['data'];
         this.actCoordinada = res.data;
-        //console.log(this.actCoordinada);
+        console.log(this.actCoordinada);
         this.formulario.controls['status'].setValue(this.actCoordinada.status);
         this.formulario.controls['act_complementaria'].setValue(this.actCoordinada.act_complementaria);
         this.formulario.controls['coordinador'].setValue(this.actCoordinada.coordinador);
@@ -170,23 +178,21 @@ export class CoordinarComponent implements OnInit {
     );
   }
   obtenerEvdComprobatorias(evdComprobatorias: any) {
-    console.log(evdComprobatorias.id_actcomplementaria)
     this.actComplementariaService.getEvdComprobatorias(evdComprobatorias.id_actcomplementaria).subscribe((res: any) => {
       this.evdCompro = res.data;
-      console.log(this.evdCompro);
     }, ((error: any) => {
       console.log(error);
     }));
   }
   crearActComplementarias() {
-    this.actCoordinada.coordinador = this.formulario.value.coordinador;
     this.actCoordinada.status = this.formulario.value.status;
     this.actCoordinada.act_complementaria = this.formulario.value.act_complementaria;
-    console.log(this.actCoordinada.coordinador);
+    this.actCoordinada.coordinador = this.formulario.value.coordinador;
+    console.log(this.actCoordinada);
     this.actCoordinadaService.postActividadCoordinada(this.actCoordinada).subscribe((res: any) => {
       console.log(res);
       this.openToast();
-
+      // this.obtenerSolicitudes();
     }, (err: any) => {
       let mensajeErrorConEtiquetas = err.error.mensaje.errores;
       console.log(mensajeErrorConEtiquetas);
@@ -199,9 +205,11 @@ export class CoordinarComponent implements OnInit {
     this.actCoordinada.status = this.formulario.value.status;
     this.actCoordinada.act_complementaria = this.formulario.value.act_complementaria;
     this.actCoordinadaService.putActividadCoordinada(this.actCoordinada).subscribe(
-      (res: any) => {
+      (res:any)=> {
+        //console.log(res);
         this.openToast();
-      }, (err: any) => {
+      },
+      (err:any) => {
         console.log('no se pudo actualizar');
       }
     );
@@ -243,7 +251,7 @@ export class CoordinarComponent implements OnInit {
             (res: any) => {
               //this.actCoordinada = res['data'];
               this.obtenerActividadesCoordinadas(this.paginaActual);
-              this.limpiarControls()
+              //  this.limpiarControls()
             }
           );
         })
@@ -263,86 +271,7 @@ export class CoordinarComponent implements OnInit {
       }
     })
   }
-  // evaluar(solicitud: any) {
-  //   this.solicitudService.getSolicitud(solicitud.id).subscribe(
-  //     (res: any) => {
-  //       // this.periodo = res['data'];
-  //       this.Solicitud = res.data;
-  //       // console.log(this.Solicitud);
-  //     }
-  //   );
-  //   Swal.fire({
-  //     title: 'Evaluación del alumno',
-  //     input: 'select',
-  //     width: '25%',
-  //     confirmButtonColor: "rgb(0, 0, 139)",
-  //     inputOptions: {
-  //       '0.00': 'Insuficiente',
-  //       '1.00': 'Suficiente',
-  //       '2.00': 'Bueno',
-  //       '3.00': 'Notable',
-  //       '4.00': 'Excelente'
-  //     },
-  //     inputPlaceholder: 'Calificación',
-  //     showCancelButton: true,
-  //     inputValidator: function (value) {
-  //       return new Promise(function (resolve, reject) {
-  //         if (value !== '') {
-  //           resolve('');
-  //         } else {
-  //           resolve('Seleccione una calificación');
-  //         }
-  //       });
-  //     },
-
-  //   }).then((result) => {
-
-  //     if (result.isConfirmed) {
-  //       Swal.fire({
-  //         icon: 'success',
-  //         width: '25%',
-  //         confirmButtonColor: "rgb(0, 0, 139)",
-  //         html: 'Valor: ' + result.value,
-  //       });
-  //         console.log('valor: ', result.value);
-  //         // console.log(solicitud);
-
-  //         this.Solicitud.valor_numerico = result.value;
-  //         console.log('-----', this.Solicitud.valor_numerico);
-  //         if (result.value > 0) {
-  //           this.Solicitud.status = 1;
-  //           // console.log(this.Solicitud);
-  //           //this.editarSolicitud();
-  //           this.solicitudService.putSolicitud(this.Solicitud).subscribe(
-  //             res => {
-  //               console.log(res);
-  //               this.obtenerSolicitudes();
-  //               // this.openToast();
-  //             },
-  //             err => {
-  //               console.log(err);
-  //               console.log('no se pudo actualizar');
-  //             }
-  //           );
-  //         } else {
-  //           this.Solicitud.status = 0;
-  //           // console.log(this.Solicitud);
-  //           this.solicitudService.putSolicitud(this.Solicitud).subscribe(
-  //             res => {
-  //               console.log(res);
-  //               this.obtenerSolicitudes();
-  //               // this.openToast();
-  //             },
-  //             err => {
-  //               console.log('no se pudo actualizar');
-  //             }
-  //           );
-  //         }
-  
-  
-  //     }
-  //   })
-  // }
+ 
   openToast() {
     const Toast = Swal.mixin({
       toast: true,
@@ -373,7 +302,7 @@ export class CoordinarComponent implements OnInit {
       allowOutsideClick: false
     }).then((result) => {
       if (result.isConfirmed) {
-        this.router.navigate(['/jefe-academica/coordinar']);
+        this.router.navigate(['/jefe-extra/coordinar']);
       }
     })
   }
@@ -383,4 +312,3 @@ export class CoordinarComponent implements OnInit {
     this.formulario.controls['coordinador'].setValue('');
   }
 }
-

@@ -50,7 +50,7 @@
           <thead class="thead-primary">
             <tr>
               <th>#</th>
-              <th>N° Control</th>
+              <th>Alumno</th>
               <!-- <th>Carrera</th> -->
               <th>Actividad Academica</th>
               <th>Periodo</th>
@@ -63,7 +63,7 @@
               <th scope="row" class="scope">{{i+1}}</th>
               <!-- <td>{{solicitud.jdepto}}</td> -->
               <td>{{solicitud.alumno}}</td>
-              <td>{{solicitud.act_complementaria}}</td>
+              <td>{{solicitud.act_especifica}}</td>
               <td>{{solicitud.periodo}}</td>
               <td>{{solicitud.created_at | date}}</td>
               <td>   
@@ -140,7 +140,7 @@
                       <label for="numcontrol"  autocomplete="off" class="form-label" required><h6>Numero control</h6></label>
                       <div class="input-group mb-3">
                           <input type="text" class="form-control" formControlName="alumno" (ngModelChange)="valorInput($event)" name="alumno" placeholder="N° control" required>
-                          <button class="btn btn-outline-success" (click)="obtenerAlumno()" [disabled]="!isbandera1" type="button" id="num_control">Buscar</button>
+                          <button class="btn btn-outline-success" (click)="obtenerAlumno()"  type="button" id="num_control">Buscar</button>
                       </div>
                     </div>
                   </div>
@@ -151,14 +151,14 @@
                     </div>
                   </div>
                 </div>
-                <div class="mb-4" [hidden]="!this.isValidSubmit">
+                <div class="mb-4">
                     <label for="observacion" class="form-label"><h6>Observación</h6></label>
                     <textarea type="text" class="form-control" id="observacion" rows="2" ></textarea>
                 </div>
           </div>
           <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="limpiarControls()" data-bs-dismiss="modal">Cancelar</button>
-          <button  class="btn btn-primary" data-bs-dismiss="modal" [disabled]="!isValidSubmit"  (click)="crearSolicitud()">Guardar</button>
+          <button  class="btn btn-primary" data-bs-dismiss="modal"  (click)="crearSolicitud()">Guardar</button>
         </div>
       </form>
       </div>  

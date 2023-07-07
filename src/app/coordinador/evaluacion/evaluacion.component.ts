@@ -15,17 +15,17 @@ export class EvaluacionComponent implements OnInit {
   complementarias: Complementarias[] = [];
   solicitudes: Solicitud[] = [];
   Solicitud = new SolicitudClase();
+  coordinador: any;
   constructor(
     private router: Router,
     private solicitudService: SolicitudService) { }
   ngOnInit(): void {
     // this.formularioReactivo();
+    this.coordinador = localStorage.getItem('rfc');
     this.obtenerSolicitudes();
-
   }
   obtenerSolicitudes() {
-
-    this.solicitudService.getSolicitudes().subscribe((res: any) => {
+    this.solicitudService.getSolicitudCoordinador(this.coordinador).subscribe((res: any) => {
       this.solicitudes = res.data;
       console.log(this.solicitudes);
     }, ((error: any) => {

@@ -5,14 +5,17 @@ import { Observable } from 'rxjs';
 import { ActvidadComplementariaInterface } from '../interfaces/act-complementaria.interface';
 import { EvdComprobatoriaInterface } from '../interfaces/evd-comprobatoria.interface';
 
-const base_url = 'http://apicomplementarias.test';
+// const base_url = 'http://apicomplementarias.test';
+const base_url = 'https://apicomplementarias.salinacruz.tecnm.mx/public';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ActividadComplementariaService {
   headerT = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http: HttpClient) { }
-  ///actividad complementarias metodos para consumir mi api
+ 
+  ///evidencias a presentas metodos para consumir mi api
   getEvdsPresentar() {
     return this.http.get<any[]>(`${base_url}/evidenciapresentar`);
   }
@@ -29,12 +32,15 @@ export class ActividadComplementariaService {
   deleteEvdPresentar(id: string): Observable<any> {
     return this.http.delete(`${base_url}/evidenciapresentar/${id}`, { headers: this.headerT });
   }
-  ///evidencias a presentas metodos para consumir mi api
+  ///actividad complementarias metodos para consumir mi api
   getActComplementarias() {
     return this.http.get<any[]>(`${base_url}/actcomplementarias`);
   }
   getActComplementaria(id: string) {
     return this.http.get<any[]>(`${base_url}/actcomplementarias/${id}`);
+  }
+  getTipoActComplementaria(tipo: string) {
+    return this.http.get<any[]>(`${base_url}/tipoactcomplementarias2/${tipo}`);
   }
   posActComplementaria(actcom: ActvidadComplementariaInterface): Observable<ActvidadComplementariaInterface> {
     return this.http.post<ActvidadComplementariaInterface>(`${base_url}/actcomplementarias`, actcom, { headers: this.headerT });
@@ -46,11 +52,14 @@ export class ActividadComplementariaService {
   getActComplementaria2(id: string) {
     return this.http.get<any[]>(`${base_url}/actcomplementaria/${id}`);
   }
+  getActComplementariasPaginado(page: number = 0) {
+return this.http.get<any[]>(`${base_url}/actcompaginado/pagina?page=${page}`);
+  }
   deleteActComplementaria(id: string): Observable<any> {
     return this.http.delete(`${base_url}/actcomplementarias/${id}`, { headers: this.headerT });
   }
-  getTipoActComplementarias(id: string) {
-    return this.http.get<any[]>(`${base_url}/tipoactcomplementaria/${id}`);
+  getTipoActComplementarias(id: string, page: number = 0 ) {
+    return this.http.get<any[]>(`${base_url}/tipoactcomplementaria/${id}?page=${page}`);
   }
   ///evidencias comprotorias metodos para consumir mi api
   getEvdComprobatorias(id: string) {

@@ -3,8 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { ExtraEscolaresComponent } from './extra-escolares.component';
 import { HomeComponent } from './home/home.component';
 import { RegistroComponent } from './registro/registro.component';
-import { EvaluacionComponent } from './evaluacion/evaluacion.component';
+
 import { ConstanciaComponent } from './constancia/constancia.component';
+import { CoordinarComponent } from './coordinar/coordinar.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 const routes: Routes = [
   {
@@ -13,8 +15,9 @@ const routes: Routes = [
     children: [
       { path: 'extraescolares', component: HomeComponent },
       { path: 'registrar', component: RegistroComponent },
-      { path: 'evaluacion', component: EvaluacionComponent },
+      { path: 'coordinar', component: CoordinarComponent },
       { path: 'acreditacion', component: ConstanciaComponent },
+      { path: 'perfil', component: PerfilComponent },
       { path: '**', redirectTo: 'extraescolares' }
     ]
   }

@@ -2,7 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CoordinadorInterface } from '../interfaces/coordinador.interface';
 import { Observable } from 'rxjs';
-const base_url = 'http://apicomplementarias.test';
+// const base_url = 'http://apicomplementarias.test';
+const base_url = 'https://apicomplementarias.salinacruz.tecnm.mx/public';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +17,21 @@ export class CoordinadorService {
   getCoordinador(rfc: string) {
     return this.http.get<any[]>(`${base_url}/coordinadores/${rfc}`);
   }
-  
+  getCoordinadoresPaginado(rfc: string, page: number = 0) {
+    return this.http.get<any[]>(`${base_url}/coordinadorespaginado/${rfc}?page=${page}`);
+  }
+  getCoordinadoresPaginado2(page: number = 0) {
+    return this.http.get<any[]>(`${base_url}/coordinadorespage/paginado?page=${page}`);
+  }
+  buscarCoordinador(rfc: string, busqueda: string) {
+    return this.http.get<any[]>(`${base_url}/buscarcoordinador/${rfc}/${busqueda}`);
+  }
+  buscarCoordinador2(busqueda: string) {
+    return this.http.get<any[]>(`${base_url}/buscarquedacoordinador/${busqueda}`);
+  }
+  contarCoordinadores() {
+    return this.http.get<any[]>(`${base_url}/contar/coordinadores`);
+  }
   cordinadoresJdepto(rfc: string) {
     return this.http.get<any[]>(`${base_url}/coordinador/${rfc}`);
   }

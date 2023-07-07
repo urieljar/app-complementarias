@@ -52,11 +52,10 @@ export class RegistrarComponent {
     this.fechareactivo = datePipe.transform(new Date(), 'fullDate');
     this.coordinador = localStorage.getItem('rfc');
     //console.log(this.ahora);
-    this.obtenerPeriodos();
-   // console.log(this.periodos);
-    this.obtenerSolicitudes();
-    this.obtenerActComplementarias();
     this.formularioReactivo();
+    this.obtenerPeriodos();
+    this.obtenerActComplementarias();
+    this.obtenerSolicitudes();
   }
   // formulario reractivo
   formularioReactivo(): void {
@@ -110,6 +109,7 @@ export class RegistrarComponent {
     }));
   }
   obtenerActComplementarias() {
+    ///ojo aqui hay error
     this.actCoordinadaService.getActividadesCoordinador(this.coordinador).subscribe((res: any) => {
       this.actCoordinadas = res.data;
       console.log(this.actCoordinadas);
@@ -143,11 +143,11 @@ export class RegistrarComponent {
     });
   }
   obtenerSolicitudes() {
-    this.solcitudService.getSolicitudes().subscribe((res: any) => {
+    this.solcitudService.getSolicitudCoordinador(this.coordinador).subscribe((res: any) => {
       this.solicitudes = res.data;
-      //console.log(this.solicitudes);
+      console.log(this.solicitudes);
     }, ((error: any) => {
-      console.log(error);
+      console.log(error.error.mensaje);
     }));
   }
   valorInput(valorInput: string) {

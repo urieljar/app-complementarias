@@ -15,6 +15,7 @@ import { TipoActividadComponent } from './tipo-actividad/tipo-actividad.componen
 import { ActividadComplementariaComponent } from './actividad-complementaria/actividad-complementaria.component';
 import { CrudActividadComponent } from './crud-actividad/crud-actividad.component';
 import { EditarActividadComponent } from './editar-actividad/editar-actividad.component';
+import { CoordinadoresComponent } from './coordinadores/coordinadores.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { EditarActividadComponent } from './editar-actividad/editar-actividad.co
     TipoActividadComponent,
     ActividadComplementariaComponent,
     CrudActividadComponent,
-    EditarActividadComponent
+    EditarActividadComponent,
+    CoordinadoresComponent
   ],
   imports: [
     CommonModule,

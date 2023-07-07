@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CoordinadorClase } from 'src/app/interfaces/coordinador.interface';
-import { CoordinadorService } from 'src/app/services/coordinador.service';
+import { JefeDptoClase } from 'src/app/interfaces/jefe-departamento.interface';
+import { JefeDptoService } from 'src/app/services/jefe-dpto.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,16 +13,16 @@ import Swal from 'sweetalert2';
 })
 export class PerfilComponent implements OnInit {
   formulario: any;
-  coordinador2: any;
-  coordinador = new CoordinadorClase();
+  jefe: any;
+  jdpto = new JefeDptoClase();
   constructor(
     private router: Router,
-    private coordinadorService: CoordinadorService
+    private jefedptoService: JefeDptoService,
   ) { }
   ngOnInit(): void {
-    this.coordinador2 = localStorage.getItem('rfc');
+    this.jefe = localStorage.getItem('rfc');
     this.formularioReactivo();
-    this.obtenerCoordinador(this.coordinador2);
+    this.obtenerJefeDpto(this.jefe);
   }
   limpiarStorage() {
     localStorage.removeItem('rfc');
@@ -43,31 +44,32 @@ export class PerfilComponent implements OnInit {
       ])
     });
   }
-  actualizar(){
-    if (this.formulario.value.nueva_contrasena && this.formulario.value.confirmar_contrasena){
+  actualizar() {
+    if (this.formulario.value.nueva_contrasena && this.formulario.value.confirmar_contrasena) {
       if (this.formulario.value.nueva_contrasena == this.formulario.value.confirmar_contrasena) {
-        this.editarCoordinador();
+        this.editarJefeDpto();
       } else {
         let mensajeError = 'No coinciden las contraseñas'
         this.mensajeError(mensajeError);
       }
-    }else{
+    } else {
       let mensajeError = 'Error en las contraseñas'
       this.mensajeError(mensajeError);
     }
   }
-  obtenerCoordinador(coordinador: any) {
-    this.coordinadorService.getCoordinador(coordinador).subscribe(
+  obtenerJefeDpto(jefe: any) {
+    this.jefedptoService.getJefeDpto(jefe).subscribe(
       (res: any) => {
         // this.periodo = res['data'];
-        this.coordinador = res.data;
-       console.log(this.coordinador);
+        this.jdpto = res.data;
+        console.log(this.jdpto);
       }
     );
   }
-  editarCoordinador() {
-    this.coordinador.clave = this.formulario.value.confirmar_contrasena;
-    this.coordinadorService.putCoordinador(this.coordinador).subscribe(
+  editarJefeDpto() {
+    this.jdpto.clave = this.formulario.value.confirmar_contrasena;
+    //console.log(this.jdpto);
+    this.jefedptoService.putJefeDpto(this.jdpto).subscribe(
       res => {
         //console.log(res);
         this.openToast();
@@ -108,7 +110,7 @@ export class PerfilComponent implements OnInit {
       confirmButtonColor: "rgb(0, 0, 139)"
     }).then((result) => {
       if (result.isConfirmed) {
-        this.router.navigate(['/coordinacion/perfil']);
+        this.router.navigate(['/jefe-extra/perfil']);
       }
     })
   }
