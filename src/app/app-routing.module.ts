@@ -28,13 +28,19 @@ const routes: Routes = [
     loadChildren: () => import('./coordinador/coordinador.module').then(m => m.CoordinadorModule)
   },
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'inicio'
+  },
+  {
     path: '**',
-    redirectTo: '/inicio'
+    pathMatch: 'full',
+    redirectTo: 'inicio'
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
